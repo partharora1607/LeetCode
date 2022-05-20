@@ -9,11 +9,12 @@ void nextPermutation(vector<int> &ar)
     {
         if (ar[i] > ar[i - 1])
         {
+            // swap with next greater number than ar[i-1];
             for (int j = i; j < n; j++)
             {
                 if (ar[j] > ar[i - 1])
                 {
-                    val = min(ar[j], val);
+                    val = min(ar[j] , val);
                     index = j;
                 }
             }
@@ -22,6 +23,6 @@ void nextPermutation(vector<int> &ar)
             return;
         }
     }
-    sort(ar.begin(), ar.end());
+    reverse(ar.begin(),ar.end());
 }
 };
