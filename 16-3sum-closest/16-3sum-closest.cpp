@@ -11,29 +11,28 @@ int threeSumClosest(vector<int> &ar, int target)
     {
         si = i + 1, ei = n - 1;
         int sum;
-        int new_target = target - ar[i];
         while (si < ei)
         {
-            sum = ar[si] + ar[ei];
-            if (sum == new_target)
+            sum = ar[i] + ar[si] + ar[ei];
+            if (sum == target)
             {
-                return sum + ar[i];
+                return sum;
             }
-            else if (sum > new_target)
+            else if (sum > target)
             {
-                if (abs(new_target - sum) < closestsum)
+                if (abs(target - sum) < closestsum)
                 {
-                    closestsum = abs(new_target - sum);
-                    ans = sum + ar[i];
+                    closestsum = abs(target - sum);
+                    ans = sum;
                 }
                 ei--;
             }
             else
             {
-                if (abs(new_target - sum) < closestsum)
+                if (abs(target - sum) < closestsum)
                 {
-                    closestsum = abs(new_target - sum);
-                    ans = sum + ar[i]; 
+                    closestsum = abs(target - sum);
+                    ans = sum;
                 }
                 si++;
             }
