@@ -9,7 +9,7 @@ void nextPermutation(vector<int> &ar)
     {
         if (ar[i] > ar[i - 1])
         {
-            // swap with next greater number than ar[i-1];
+            // swap with just greater number than ar[i-1];
             for (int j = i; j < n; j++)
             {
                 if (ar[j] > ar[i - 1])
@@ -19,7 +19,8 @@ void nextPermutation(vector<int> &ar)
                 }
             }
             swap(ar[i - 1], ar[index]);
-            sort(ar.begin() + i, ar.end());
+            // sort the last part of it.             
+            reverse(ar.begin() + i, ar.end());
             return;
         }
     }
