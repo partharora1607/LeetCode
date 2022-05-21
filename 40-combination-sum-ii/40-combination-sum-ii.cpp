@@ -1,6 +1,6 @@
 class Solution {
 public:
-void helper(vector<int> &ar, int si, int ei, int target, int sum, vector<int> &ans, vector<vector<int>> &v)
+   void helper(vector<int> &ar, int si, int ei, int target, int sum, vector<int> &ans, vector<vector<int>> &v)
 {
     if (si > ei)
     {
@@ -23,18 +23,21 @@ void helper(vector<int> &ar, int si, int ei, int target, int sum, vector<int> &a
         return;
     }
 
-    for (int i = si + 1; i <= ei; i++)
+    for (int i = si; i <= ei; i++)
     {
-        if (ar[i] != ar[i - 1])
+        if (i == si)
         {
-            helper(ar, i, ei, target, sum, ans, v);
-            break;
+            ans.push_back(ar[si]);
+            helper(ar, si + 1, ei, target, sum + ar[si], ans, v);
+            ans.pop_back();
+        }
+        else if (ar[i] != ar[i - 1])
+        {
+            ans.push_back(ar[i]);
+            helper(ar, i + 1, ei, target, sum + ar[i],ans, v);
+            ans.pop_back();
         }
     }
-
-    ans.push_back(ar[si]);
-    helper(ar, si + 1, ei, target, sum + ar[si], ans, v);
-    ans.pop_back();
 }
 
 vector<vector<int>> combinationSum2(vector<int> &ar, int target)
