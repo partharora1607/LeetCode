@@ -2,8 +2,7 @@ class Solution {
 public:
 int searchInsert(vector<int> &ar, int target)
 {
-    int i = 0, j = ar.size() - 1, mid, ans = -1;
-    /* ans will tell me the possible index */
+    int i = 0, j = ar.size() - 1, mid;
     while (i <= j)
     {
         mid = i + (j - i) / 2;
@@ -13,15 +12,25 @@ int searchInsert(vector<int> &ar, int target)
         }
         else if (target > ar[mid])
         {
-            ans = mid + 1; // possible ans can be just next index
-            i = mid + 1;   // move right
+            i = mid + 1; // move right
         }
         else
         {
-            ans = mid;   // possible ans can be the same index
             j = mid - 1; // move left
         }
     }
-    return ans;
+    if (j < 0)
+    {
+        return 0;
+    }
+    else if (i >= ar.size())
+    {
+        return i;
+    }
+    else if (target > ar[i])
+    {
+        return i + 1;
+    }
+    return i;
 }
 };
