@@ -1,24 +1,19 @@
 class Solution {
 public:
-    int position(vector<int> &ar, int sp, int ep, int target)
+    int position(vector<int> &ar, int ep, int target)
 {
     int i = 0, j = ar.size() - 1, mid;
+    int ans = -1; // this will tell me the possible ans of positions
     while (i <= j)
     {
         mid = i + (j - i) / 2;
         if (ep == 0)
         {
-            // we have to find the starting position
+            // find the stating position
             if (ar[mid] == target)
             {
-                if (mid - 1 >= 0 && ar[mid - 1] == ar[mid])
-                {
-                    j = mid - 1; // move more left
-                }
-                else
-                {
-                    return mid; // return mid
-                }
+                ans = mid;
+                j = mid - 1; // move left
             }
             else if (target > ar[mid])
             {
@@ -31,17 +26,11 @@ public:
         }
         else
         {
-            // we have to find the end position
+            // find the ending positions
             if (ar[mid] == target)
             {
-                if (mid + 1 < ar.size() && ar[mid + 1] == ar[mid])
-                {
-                    i = mid + 1; // move right
-                }
-                else
-                {
-                    return mid;
-                }
+                ans = mid;
+                i = mid + 1; // move right
             }
             else if (target > ar[mid])
             {
@@ -49,18 +38,17 @@ public:
             }
             else
             {
-                j = mid - 1;
-                // move left
+                j = mid - 1; // move left
             }
         }
     }
-    return -1;
+    return ans;
 }
 
 vector<int> searchRange(vector<int> &nums, int target)
 {
-    int sp = position(nums, -1, 0, target);
-    int ep = position(nums, 0, -1, target);
+    int sp = position(nums, 0, target);
+    int ep = position(nums, -1, target);
     return {sp, ep};
 }
 };
