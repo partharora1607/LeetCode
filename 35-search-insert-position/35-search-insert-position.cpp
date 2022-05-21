@@ -1,8 +1,9 @@
 class Solution {
 public:
-    int searchInsert(vector<int> &ar, int target)
+int searchInsert(vector<int> &ar, int target)
 {
     int i = 0, j = ar.size() - 1, mid, ans = -1;
+    /* ans will tell me the possible index */
     while (i <= j)
     {
         mid = i + (j - i) / 2;
