@@ -1,6 +1,6 @@
 class Solution {
 public:
-   void helper(vector<int> &ar, int si, int ei, int target, int sum, vector<int> &ans, vector<vector<int>> &v)
+void helper(vector<int> &ar, int si, int ei, int target, int sum, vector<int> &ans, vector<vector<int>> &v)
 {
     if (si > ei)
     {
@@ -33,9 +33,8 @@ public:
         }
         else if (ar[i] != ar[i - 1])
         {
-            ans.push_back(ar[i]);
-            helper(ar, i + 1, ei, target, sum + ar[i],ans, v);
-            ans.pop_back();
+            helper(ar, i, ei, target, sum, ans, v);
+            break;
         }
     }
 }
