@@ -20,7 +20,6 @@ vector<vector<int>> helper_2(vector<int> &ar, int si, int ei)
             ans.push_back(v[i][j]);
         }
         v.push_back(ans);
-        ans.clear();
     }
 
     return v;
