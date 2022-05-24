@@ -3,8 +3,8 @@ public:
 int lengthOfLongestSubstring(string s)
 {
     unordered_set<int> set1;
-    int i = 0, ans = 0;
-    for (int j = 0; j < s.length(); j++)
+    int i = 0, ans = 0, n = s.length();
+    for (int j = 0; j < n; j++)
     {
         while (set1.count(s[j]) == 1)
         {
