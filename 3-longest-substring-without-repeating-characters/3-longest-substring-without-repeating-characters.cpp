@@ -3,10 +3,8 @@ public:
 int lengthOfLongestSubstring(string s)
 {
     unordered_map<int, int> mymap;
-    int ans = 0;
-    int i = 0;
-    int j = 0;
-    while (j < s.length())
+    int ans=0,i=0,j=0,n = s.length();
+    while (j < n)
     {
         if (mymap.count(s[j]) == 0)
         {
@@ -17,8 +15,7 @@ int lengthOfLongestSubstring(string s)
         {
             while (mymap.count(s[j]) == 1)
             {
-                mymap.erase(s[i]);
-                i++;
+                mymap.erase(s[i++]);
             }
             mymap[s[j]]++;
         }
