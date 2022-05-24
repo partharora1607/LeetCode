@@ -1,11 +1,16 @@
 class Solution {
 public:
-vector<int> getRow(int rowIndex) {
-        vector<int> A(rowIndex+1, 0);
-        A[0] = 1;
-        for(int i=1; i<rowIndex+1; i++)
-            for(int j=i; j>=1; j--)
-                A[j] += A[j-1];
-        return A;
+    vector<int> getRow(int n)
+{
+    vector<int> ar(n + 1, 0);
+    ar[0] = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = i; j >= 1; j--)
+        {
+            ar[j] += ar[j - 1];
+        }
     }
+    return ar;
+}
 };
