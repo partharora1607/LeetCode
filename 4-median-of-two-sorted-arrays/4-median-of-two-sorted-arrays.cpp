@@ -1,72 +1,98 @@
 class Solution {
 public:
-    double findMedianSortedArrays(vector<int> &A, vector<int> &B)
+double findMedianSortedArrays(vector<int> &ar1, vector<int> &ar2)
 {
-    long n = A.size(), m = B.size(), t = (n + m + 1) / 2;
-    if (n > m)
-    {
-        return findMedianSortedArrays(B, A);
-    }
+    int n = ar1.size();
+    int m = ar2.size();
+    int size = n + m;
+    int half = size / 2;
     if (n == 0)
     {
-
-        return m % 2 == 0 ? (double)(B[m / 2 - 1] + B[m / 2]) / 2 : B[m / 2];
+        return m % 2 == 0 ? (double)(ar2[(m - 1) / 2] + ar2[(m - 1) / 2 + 1]) / 2 : (double)(ar2[(m - 1) / 2]);
     }
     if (m == 0)
     {
-        return n % 2 == 0 ? (double)(A[n / 2 - 1] + A[n / 2]) / 2 : A[n / 2];
+        return n % 2 == 0 ? (double)(ar1[(n - 1) / 2] + ar1[(n - 1) / 2 + 1]) / 2 : (double)(ar1[(n - 1) / 2]);
     }
-    long left = 0, right = n;
-    while (left <= right)
+    if (m > n)
     {
-        long partitionA = left + (right - left) / 2;
-        long partitionB = t - double(partitionA); // partitionA + partitionB = (n+m+1)/2
-        // if partitionA is 0 then take INT_MIN for maxLeftA (nothing is left in the left of partition)
-        double maxLeftA = INT_MIN;
-        if (partitionA > 0)
-        {
-            maxLeftA = A[partitionA - 1];
-        }
+        return findMedianSortedArrays(ar2, ar1);
+    }
+    int left2 = 0, right2 = m - 1;
+    int r1;
+    int leftvalue1, leftvalue2, rightvalue1, rightvalue2;
+    while (left2 <= right2)
+    {
+        int mid = (left2 + right2) / 2;
+        r1 = half - mid - 2;
 
-        // if partitionA is n then take INT_MAX for minRightA (nothing is left in the right of partition)
-        double minRightA = INT_MAX;
-        if (partitionA < n)
-        {
-            minRightA = A[partitionA];
-        }
+        leftvalue1 = INT_MIN;
+        rightvalue1 = INT_MAX;
+        leftvalue2 = INT_MIN;
+        rightvalue2 = INT_MAX;
 
-        // Similarly for maxLeftB and minrightB
-        double maxLeftB = INT_MIN;
-        if (partitionB > 0)
+        if (mid >= 0)
         {
-            maxLeftB = B[partitionB - 1];
+            leftvalue2 = ar2[mid];
         }
-
-        double minRightB = INT_MAX;
-        if (partitionB < m)
+        if (mid + 1 < ar2.size())
         {
-            minRightB = B[partitionB];
+            rightvalue2 = ar2[mid + 1];
         }
-        if (maxLeftA <= minRightB && maxLeftB <= minRightA)
-        { // check weather it's a perfect partition or not
-            if ((n + m) % 2 == 0)
-            { // if the sorted merged array is of even length
-                return (max(maxLeftA, maxLeftB) + min(minRightA, minRightB)) / 2.0;
+        if (r1 >= 0)
+        {
+            leftvalue1 = ar1[r1];
+        }
+        if (r1 + 1 < ar1.size())
+        {
+            rightvalue1 = ar1[r1 + 1];
+        }
+        if (leftvalue2 <= rightvalue1 && leftvalue1 <= rightvalue2)
+        {
+            if (size % 2 == 0)
+            {
+                return (max(leftvalue1, leftvalue2) + min(rightvalue1, rightvalue2)) / 2.0;
             }
             else
             {
-                return max(maxLeftA, maxLeftB);
+                return min(rightvalue1, rightvalue2);
             }
         }
-        else if (maxLeftA > minRightB)
-        { // move left side.
-            right = partitionA - 1;
+        else if (leftvalue1 > rightvalue2)
+        {
+            left2 = mid + 1;
         }
         else
-        { // move right side
-            left = partitionA + 1;
+        {
+            right2 = mid - 1;
         }
     }
-    return 0.0; // we can't find the median if input is invalid i.e., arrays are not sorted
+
+    if (right2 < 0)
+    {
+        r1 = half - 1;
+        if (r1 >= 0)
+        {
+            leftvalue1 = ar1[r1];
+        }
+        rightvalue1 = INT_MAX;
+        if (r1 + 1 < ar1.size())
+        {
+            rightvalue1 = ar1[r1 + 1];
+        }
+        leftvalue2 = INT_MIN;
+        rightvalue2 = ar2[0];
+        if (size % 2 == 0)
+        {
+            int val1 = leftvalue1;
+            int val2 = min(rightvalue1, rightvalue2);
+            return (double)((val1 + val2)) / 2.0;
+        }
+        else
+        {
+            return min(rightvalue1, rightvalue2);
+        }
+    }
+    return 0.0;
 }
 };
