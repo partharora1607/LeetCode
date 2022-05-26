@@ -1,6 +1,6 @@
 class Solution {
 public:
-double findMedianSortedArrays(vector<int> &ar1, vector<int> &ar2)
+    double findMedianSortedArrays(vector<int> &ar1, vector<int> &ar2)
 {
     int n = ar1.size();
     int m = ar2.size();
@@ -19,11 +19,11 @@ double findMedianSortedArrays(vector<int> &ar1, vector<int> &ar2)
         return findMedianSortedArrays(ar2, ar1);
     }
     int left2 = 0, right2 = m - 1;
-    int r1;
+    int r1, mid;
     int leftvalue1, leftvalue2, rightvalue1, rightvalue2;
     while (left2 <= right2)
     {
-        int mid = (left2 + right2) / 2;
+        mid = (left2 + right2) / 2;
         r1 = half - mid - 2;
 
         leftvalue1 = INT_MIN;
@@ -67,7 +67,6 @@ double findMedianSortedArrays(vector<int> &ar1, vector<int> &ar2)
             right2 = mid - 1;
         }
     }
-
     if (right2 < 0)
     {
         r1 = half - 1;
@@ -84,9 +83,7 @@ double findMedianSortedArrays(vector<int> &ar1, vector<int> &ar2)
         rightvalue2 = ar2[0];
         if (size % 2 == 0)
         {
-            int val1 = leftvalue1;
-            int val2 = min(rightvalue1, rightvalue2);
-            return (double)((val1 + val2)) / 2.0;
+            return (double)((leftvalue1 + min(rightvalue1, rightvalue2))) / 2.0;
         }
         else
         {
