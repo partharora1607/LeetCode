@@ -25,7 +25,6 @@ ListNode *helper(ListNode *head, int n)
     {
         return NULL;
     }
-
     if (n == 0)
     {
         return head->next;
