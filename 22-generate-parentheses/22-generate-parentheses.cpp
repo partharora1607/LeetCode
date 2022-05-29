@@ -2,7 +2,7 @@ class Solution {
 public:
    void helper(int n, vector<string> &v, string s, int openN, int closedN)
 {
-    if (s.length() == 2 * n)
+    if (closedN == n && openN == n)
     {
         v.push_back(s);
         return;
