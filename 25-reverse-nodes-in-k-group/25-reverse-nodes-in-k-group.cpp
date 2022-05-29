@@ -10,41 +10,33 @@
  */
 class Solution {
 public:
-    int getsize(ListNode *head)
+    ListNode *reverseKGroup(ListNode *head, int k)
 {
-    if (head == NULL)
-    {
-        return 0;
-    }
-    return getsize(head->next) + 1;
-}
-
-ListNode *helper(ListNode *head, int k, int size)
-{
-    if (size < k || head == NULL || head->next == NULL)
+    if (head == NULL || head->next == NULL)
     {
         return head;
     }
-    ListNode *c, *p, *n;
-    c = head;
-    n = NULL;
-    p = NULL;
+
+    ListNode *temp1 = head;
     int count = 0;
-    while (c != NULL && count < k)
+    while (temp1 != NULL && count < k - 1)
     {
-        n = c->next;
-        c->next = p;
-        p = c;
-        c = n;
+        temp1 = temp1->next;
         count++;
     }
-    head->next = helper(c, k, size - k);
-    return p;
-}
-
-ListNode *reverseKGroup(ListNode *head, int k)
-{
-    int size = getsize(head);
-    return helper(head, k, size);
+    if (temp1 == NULL)
+    {
+        return head;
+    }
+    ListNode *prev = NULL, *curr = head, *next = NULL;
+    while (curr != NULL && prev != temp1)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    head->next = reverseKGroup(curr, k);
+    return prev;
 }
 };
