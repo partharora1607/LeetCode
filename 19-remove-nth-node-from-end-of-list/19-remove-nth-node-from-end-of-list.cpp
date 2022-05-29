@@ -10,33 +10,25 @@
  */
 class Solution {
 public:
-    int getsize(ListNode *head)
+    ListNode *removeNthFromEnd(ListNode *head, int n)
 {
-    if (head == NULL)
+    ListNode *temp1 = head;
+    ListNode *temp2 = head;
+    for (int i = 0; i < n; i++)
     {
-        return 0;
+        temp2 = temp2->next;
     }
-    return getsize(head->next) + 1;
-}
-
-ListNode *helper(ListNode *head, int n)
-{
-    if (head == NULL)
+    while (temp2 != NULL && temp2->next != NULL)
     {
-        return NULL;
+        temp2 = temp2->next;
+        temp1 = temp1->next;
     }
-    if (n == 0)
-    {
+    if(temp1 == head && temp2 == NULL){
         return head->next;
     }
-    head->next = helper(head->next, n - 1);
+    if(temp1->next != NULL){
+        temp1->next = temp1->next->next;
+    }
     return head;
-}
-
-ListNode *removeNthFromEnd(ListNode *head, int n)
-{
-    int size = getsize(head);
-    int m = size - n;
-    return helper(head, m); // m = index
 }
 };
