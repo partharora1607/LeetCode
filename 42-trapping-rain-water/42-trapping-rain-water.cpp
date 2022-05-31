@@ -16,15 +16,11 @@ public:
         rightmax[i] = max(rightmax[i + 1], ar[i + 1]);
     }
 
+    int sum = 0; 
+        
     for (int i = 0; i < ar.size(); i++)
     {
         ar[i] = min(leftmax[i], rightmax[i]) - ar[i] > 0 ? min(leftmax[i], rightmax[i]) - ar[i] : 0;
-    }
-
-    int sum = 0;
-
-    for (int i = 0; i < ar.size(); i++)
-    {
         sum += ar[i];
     }
 
