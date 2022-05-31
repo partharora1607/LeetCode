@@ -2,40 +2,41 @@ class Solution {
 public:
     vector<int> findSubstring(string s, vector<string> &words)
 {
+    int len = words[0].size();
     int no_of_words = words.size();
-    int len = words[0].length();
-    unordered_map<string, int> mymap;
-    vector<int> result;
-    if (len * no_of_words > s.length())
+    int total = len * no_of_words;
+    if (total > s.length())
     {
-        return result;
+        return {};
     }
+    vector<int> result;
+    unordered_map<string, int> mymap;
     for (int i = 0; i < words.size(); i++)
     {
         mymap[words[i]]++;
     }
-    for (int i = 0; i <= s.length() - (no_of_words * len); i++)
+
+    for (int i = 0; i < s.length() - total + 1; i++)
     {
-        unordered_map<string, int> usemap;
-        for (int j = i; j < i + (no_of_words * len); j += len)
+        unordered_map<string, int> mymap2;
+        for (int j = i; j < i + total; j += len)
         {
             string curr = s.substr(j, len);
             if (mymap.find(curr) == mymap.end())
             {
                 break;
             }
-            usemap[curr]++;
-            if (usemap[curr] > mymap[curr])
+            mymap2[curr]++;
+            if (mymap2[curr] > mymap[curr])
             {
                 break;
             }
         }
-        if (mymap == usemap)
+        if (mymap2 == mymap)
         {
             result.push_back(i);
         }
     }
     return result;
 }
-
 };
