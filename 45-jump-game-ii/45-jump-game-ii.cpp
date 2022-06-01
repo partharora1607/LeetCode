@@ -4,7 +4,8 @@ int jump(vector<int> &ar)
 {
     int ans = 0;
     int l  = 0, r = 0;
-    while (r < ar.size() - 1)
+    int goal = ar.size() - 1;
+    while (r < goal)
     {
         int farthest = 0;
         for (int i = l; i < r + 1; i++)
