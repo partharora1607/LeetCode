@@ -11,19 +11,19 @@
  */
 class Solution {
 public:
-bool isbst(TreeNode *root, long long low, long long high)
+   bool helper(TreeNode *root, long long mini, long long maxi)
 {
-    if (root == NULL)
+    if(root == NULL){
         return true;
-
-    if (root->val >= high || root->val <= low)
+    }
+    if(root->val >= maxi || root->val <= mini){
         return false;
-
-    return isbst(root->left, low, root->val) && isbst(root->right, root->val, high);
+    }
+    return helper(root->left , mini,root->val) && helper(root->right , root->val , maxi);
 }
 
 bool isValidBST(TreeNode *root)
 {
-    return isbst(root, -2147483649, 2147483649); // when i passed ( INT_MIN - 1 ) , gives error so that i pass value
+    return helper(root, -2147483649, 2147483649);
 }
 };
