@@ -3,12 +3,12 @@ public:
 int jump(vector<int> &ar)
 {
     int ans = 0;
-    int l  = 0, r = 0;
+    int l = 0, r = 0;
     int goal = ar.size() - 1;
     while (r < goal)
     {
         int farthest = 0;
-        for (int i = l; i < r + 1; i++)
+        for (int i = l; i <= r; i++)
         {
             farthest = max(farthest, ar[i] + i);
         }
