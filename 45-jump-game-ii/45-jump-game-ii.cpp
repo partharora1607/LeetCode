@@ -1,23 +1,20 @@
 class Solution {
 public:
-int jump(vector<int> &nums)
+int jump(vector<int> &ar)
 {
-    int goal = nums.size() - 1;
-    int pointer = 0;
-    int count = 0;
-    while (goal > 0)
+    int ans = 0;
+    int l  = 0, r = 0;
+    while (r < ar.size() - 1)
     {
-        pointer = 0;
-        for (int i = goal - 1; i >= 0; i--)
+        int farthest = 0;
+        for (int i = l; i < r + 1; i++)
         {
-            if (nums[i] >= goal - i)
-            {
-                pointer = i;
-            }
+            farthest = max(farthest, ar[i] + i);
         }
-        goal = pointer;
-        count++;
+        l = r + 1;
+        r = farthest;
+        ans++;
     }
-    return count;
+    return ans;
 }
 };
