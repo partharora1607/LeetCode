@@ -1,21 +1,23 @@
 class Solution {
 public:
-        int jump(vector<int> &ar)
+int jump(vector<int> &nums)
 {
-    int n = ar.size();
-    int *output = new int[n];
-    output[n - 1] = 0;
-    for (int i = n - 2; i >= 0; i--)
+    int goal = nums.size() - 1;
+    int pointer = 0;
+    int count = 0;
+    while (goal > 0)
     {
-        int ans = pow(10, 4) + 1;
-        for (int j = 1; (i + j) < n && j <= ar[i]; j++)
+        pointer = 0;
+        for (int i = goal - 1; i >= 0; i--)
         {
-            
-            int smallans = output[i + j] + 1;
-            ans = min(smallans, ans);
+            if (nums[i] >= goal - i)
+            {
+                pointer = i;
+            }
         }
-        output[i] = ans;
+        goal = pointer;
+        count++;
     }
-    return output[0];
+    return count;
 }
 };
