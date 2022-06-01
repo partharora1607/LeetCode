@@ -7,7 +7,7 @@ public:
     output[n - 1] = 0;
     for (int i = n - 2; i >= 0; i--)
     {
-        int ans = pow(10, 5);
+        int ans = pow(10, 4) + 1;
         for (int j = 1; (i + j) < n && j <= ar[i]; j++)
         {
             
