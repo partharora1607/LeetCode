@@ -1,18 +1,23 @@
 class Solution {
 public:
-    int climbStairs(int n)
+int climbStairs(int n)
 {
-    if(n <= 2){
+    if (n <= 2)
+    {
         return n;
     }
-    int *ar = new int[n + 1];
-    ar[0] = 0;
-    ar[1] = 1;
-    ar[2] = 2;
-    for (int i = 3; i <= n; i++)
+
+    int prev1 = 1;
+    int prev2 = 2;
+    int ans = 0;
+
+    for (int i = 2; i < n; i++)
     {
-        ar[i] = ar[i - 1] + ar[i - 2];
+        ans = prev1 + prev2;
+        prev1 = prev2;
+        prev2 = ans;
     }
-    return ar[n];
+
+    return ans;
 }
 };
