@@ -17,7 +17,7 @@ int minDepth(TreeNode *root)
     {
         return 0;
     }
-    if (root->left == NULL && root->right == NULL)
+    if (!root->left && !root->right)
     {
         return 1;
     }
