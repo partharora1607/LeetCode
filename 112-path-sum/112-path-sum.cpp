@@ -11,33 +11,38 @@
  */
 class Solution {
 public:
-    bool helper(TreeNode *root, int x, int sum)
+int sum = 0;
+
+bool hasPathSum(TreeNode *root, int targetSum)
 {
     if (root == NULL)
     {
         return false;
     }
+
     sum += root->val;
+
     if (root->left == NULL && root->right == NULL)
     {
-        if (sum == x)
+        if (sum == targetSum)
         {
             return true;
         }
+        sum -= root->val;
         return false;
     }
 
-    bool leftans = helper(root->left, x, sum);
-    if (leftans == true)
+    bool leftans = hasPathSum(root->left, targetSum);
+    if (leftans)
     {
         return true;
     }
-    bool rightans = helper(root->right, x, sum);
-    return rightans;
-}
-
-bool hasPathSum(TreeNode *root, int targetSum)
-{
-    return helper(root, targetSum, 0);
+    bool rightans = hasPathSum(root->right, targetSum);
+    if (rightans)
+    {
+        return true;
+    }
+    sum -= root->val;
+    return false;
 }
 };
