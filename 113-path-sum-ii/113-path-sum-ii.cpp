@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    vector<vector<int>> v;
+vector<vector<int>> v;
 vector<int> ans;
 int sum = 0;
 
