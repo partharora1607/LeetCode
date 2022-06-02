@@ -21,13 +21,15 @@
  */
 class Solution {
 public:
-    TreeNode *sortedListToBST(ListNode *head, ListNode *tail = NULL)
+    TreeNode *sortedListToBST(ListNode *head, ListNode *tail = NULL)// default parameter
 {
     if (head == tail)
     {
         return NULL;
     }
 
+    // Calculating mid value for the root.     
+        
     ListNode *fast = head, *slow = head;
     while (fast != tail && fast->next != tail)
     {
