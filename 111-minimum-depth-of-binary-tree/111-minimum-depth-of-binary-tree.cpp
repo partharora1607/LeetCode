@@ -17,20 +17,15 @@ int minDepth(TreeNode *root)
     {
         return 0;
     }
-    if (!root->left && !root->right)
-    {
-        return 1;
+    if(root->left == NULL){
+        return minDepth(root->right) + 1;
     }
-    int leftans = INT_MAX;
-    if (root->left)
-    {
-        leftans = minDepth(root->left);
+    if(root->right == NULL){
+        return minDepth(root->left) + 1;
     }
-    int rightans = INT_MAX;
-    if (root->right)
-    {
-        rightans = minDepth(root->right);
+    if(root->left && root->right){
+        return min(minDepth(root->left) , minDepth(root->right)) + 1;
     }
-    return min(rightans, leftans) + 1;
+    return 1;
 }
 };
