@@ -11,16 +11,11 @@
  */
 class Solution {
 public:
-    int sumOfLeftLeaves(TreeNode *root, bool isleft = false)
+
+int sumOfLeftLeaves(TreeNode *root, bool isleft = false)
 {
-    if (root == NULL)
-    {
-        return 0;
-    }
-    if (root->left == NULL && root->right == NULL)
-    {
-        return isleft ? root->val : 0;
-    }
+    if (root == NULL) return 0;
+    if (root->left == NULL && root->right == NULL) return isleft ? root->val : 0;
     return sumOfLeftLeaves(root->left, true) + sumOfLeftLeaves(root->right, false);
 }
 };
