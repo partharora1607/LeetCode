@@ -27,17 +27,10 @@ string convert(int a)
 
 void helper(TreeNode *root, string s)
 {
-    if (root == NULL)
-    {
-        return;
-    }
-    if (root->val < 0)
-    {
-        s += "-";
-    }
+    if (root == NULL) return;
+    if (root->val < 0) s += "-";
     s += convert(abs(root->val));
-    if (root->left == NULL && root->right == NULL)
-        res.push_back(s);
+    if (root->left == NULL && root->right == NULL) res.push_back(s);
     s += "->";
     helper(root->left, s);
     helper(root->right, s);
