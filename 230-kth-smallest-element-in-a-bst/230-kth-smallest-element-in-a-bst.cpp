@@ -18,6 +18,9 @@ void helper(TreeNode *root, int k)
     {
         return;
     }
+    if(res.size() >= k){
+        return;
+    }
     helper(root->left , k);
     res.push_back(root->val);
     helper(root->right , k);
