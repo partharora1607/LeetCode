@@ -11,16 +11,11 @@
  */
 class Solution {
 public:
-    vector<int> res;
+vector<int> res;
 void helper(TreeNode *root, int k)
 {
-    if (root == NULL)
-    {
-        return;
-    }
-    if(res.size() >= k){
-        return;
-    }
+    if (root == NULL) return;
+    if(res.size() >= k) return;
     helper(root->left , k);
     res.push_back(root->val);
     helper(root->right , k);
