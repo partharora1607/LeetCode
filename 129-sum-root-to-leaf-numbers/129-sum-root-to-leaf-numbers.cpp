@@ -11,11 +11,11 @@
  */
 class Solution {
 public:
-int sumNumbers(TreeNode *root, int sum = 0)
+int sumNumbers(TreeNode *u, int s = 0)
 {
-    if (root == NULL) return 0;
-    sum = sum * 10 + root->val;
-    if (root->left == NULL && root->right == NULL) return sum;
-    return sumNumbers(root->left, sum) + sumNumbers(root->right, sum);
+    if (!u) return 0;
+    s = s * 10 + u->val;
+    if (!u->left  && !u->right) return s;
+    return sumNumbers(u->left, s) + sumNumbers(u->right, s);
 }
 };
