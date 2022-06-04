@@ -1,12 +1,12 @@
 class Solution {
 public:
 vector<vector<string>> v;
-vector<string> res;
 
 void helper(const int n, unordered_set<int> &cols, unordered_set<int> &posdiagonal, unordered_set<int> &negdiagonal, vector<vector<char>> &matrix,int row)
 {
     if (row == n)
     {
+        vector<string> res;
         for (int i = 0; i < matrix.size(); i++)
         {
             string s;
@@ -17,7 +17,6 @@ void helper(const int n, unordered_set<int> &cols, unordered_set<int> &posdiagon
             res.push_back(s);
         }
         v.push_back(res);
-        res.clear();
     }
 
     for (int c = 0; c < n; c++)
