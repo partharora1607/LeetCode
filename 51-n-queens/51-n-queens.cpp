@@ -1,7 +1,7 @@
 class Solution {
 public:
 vector<vector<string>> v;
-void helper(const int n, unordered_set<int> &cols, unordered_set<int> &posdiagonal, unordered_set<int> &negdiagonal, vector<vector<char>> &matrix,int row)
+void helper(int n, unordered_set<int> &cols, unordered_set<int> &posdiagonal, unordered_set<int> &negdiagonal, vector<vector<char>> &matrix, int row)
 {
     if (row == n)
     {
@@ -16,6 +16,7 @@ void helper(const int n, unordered_set<int> &cols, unordered_set<int> &posdiagon
             res.push_back(s);
         }
         v.push_back(res);
+        return;
     }
 
     for (int c = 0; c < n; c++)
