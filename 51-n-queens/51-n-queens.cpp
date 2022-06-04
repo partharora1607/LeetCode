@@ -1,7 +1,6 @@
 class Solution {
 public:
 vector<vector<string>> v;
-
 void helper(const int n, unordered_set<int> &cols, unordered_set<int> &posdiagonal, unordered_set<int> &negdiagonal, vector<vector<char>> &matrix,int row)
 {
     if (row == n)
