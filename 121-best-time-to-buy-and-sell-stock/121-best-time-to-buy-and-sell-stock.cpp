@@ -3,7 +3,7 @@ public:
     
 int maxProfit(vector<int> &ar)
 {
-    if(ar.size() < 2){
+    if(ar.size() == 1){
         return 0;
     }
     int n = ar.size();
