@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int ans = 0;
+int ans = 0;
 map<vector<vector<char>>, int> mymap;
 
 void helper(int n, unordered_set<int> &cols, unordered_set<int> &posdiagonal, unordered_set<int> &negdiagonal, vector<vector<char>> &matrix, int row)
