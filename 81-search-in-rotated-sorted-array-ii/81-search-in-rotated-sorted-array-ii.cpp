@@ -4,7 +4,6 @@ public:
 {
     return ar[i] != target;
 }
-
 bool search(vector<int> &ar, int target)
 {
     int n = ar.size();
