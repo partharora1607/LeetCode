@@ -1,52 +1,57 @@
 class Solution {
 public:
-    bool search(vector<int>& nums, int target) {
-        int n = nums.size();
-        if (n == 0) return false;
-        int end = n - 1;
-        int start = 0;
+    bool isBinarySearchHelpful(vector<int> &ar, int i, int target)
+{
+    return ar[i] != target;
+}
 
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-
-            if (nums[mid] == target) {
-                return true;
-            }
-
-            if (!isBinarySearchHelpful(nums, start, nums[mid])) {
-                start++;
-                continue;
-            }
-
-            // which array does pivot belong to.
-            bool pivotArray = existsInFirst(nums, start, nums[mid]);
-
-            // which array does target belong to.
-            bool targetArray = existsInFirst(nums, start, target);
-            if (pivotArray ^ targetArray) { // If pivot and target exist in different sorted arrays, recall that xor is true only when both the operands are distinct
-                if (pivotArray) {
-                    start = mid + 1; // pivot in the first, target in the second
-                } else {
-                    end = mid - 1; // target in the first, pivot in the second
-                }
-            } else { // If pivot and target exist in same sorted array
-                if (nums[mid] < target) {
-                    start = mid + 1;
-                } else {
-                    end = mid - 1;
-                }
-            }
-        }
+bool search(vector<int> &ar, int target)
+{
+    int n = ar.size();
+    if (n == 0)
+    {
         return false;
     }
+    int i = 0, j = n - 1;
+    while (i <= j)
+    {
+        int mid = (i + j) / 2;
+        if (ar[mid] == target)
+        {
+            return true;
+        }
 
-    // returns true if we can reduce the search space in current binary search space
-    bool isBinarySearchHelpful(vector<int>& nums, int start, int element) {
-        return nums[start] != element;
-    }
+        if (!isBinarySearchHelpful(ar, i, ar[mid]))
+        {
+            i++;
+            continue;
+        }
 
-    // returns true if element exists in first array, false if it exists in second
-    bool existsInFirst(vector<int>& nums, int start, int element) {
-        return nums[start] <= element;
+        else if (ar[mid] > ar[i])
+        {
+            // left part is sorted
+            if (target >= ar[i] && target < ar[mid])
+            {
+                j = mid - 1;
+            }
+            else
+            {
+                i = mid + 1;
+            }
+        }
+        else
+        {
+            // right part is sorted
+            if (target > ar[mid] && target <= ar[j])
+            {
+                i = mid + 1;
+            }
+            else
+            {
+                j = mid - 1;
+            }
+        }
     }
+    return false;
+}
 };
