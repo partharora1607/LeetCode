@@ -21,6 +21,8 @@ public:
         }
         ar[i] = ans;
     }
-    return ar[n];
+    int fans =  ar[n];
+        delete[] ar;
+        return fans;
 }
 };
