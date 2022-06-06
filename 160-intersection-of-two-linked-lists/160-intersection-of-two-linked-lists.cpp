@@ -58,6 +58,5 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
 
     // 0(m + n) 
     return NULL; // if we don't find my intersection we will return NULL;
-
 }
 };
