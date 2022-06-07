@@ -17,22 +17,14 @@ int maxdepth = 0;
 
 void helper(TreeNode *root, int depth = 0, bool isleft = false, bool isright = false)
 {
-    if(root == NULL){
-        return;
-    }
+    if(root == NULL) return;
     if (root->left == NULL && root->right == NULL)
     {
         if (depth > maxdepth)
         {
             maxdepth = depth;
-            if (root->left)
-            {
-                ans = root->val;
-            }
-            else
-            {
-                ans = root->val;
-            }
+            if (root->left) ans = root->val;
+            else ans = root->val;
         }
         return;
     }
@@ -42,10 +34,7 @@ void helper(TreeNode *root, int depth = 0, bool isleft = false, bool isright = f
 
 int findBottomLeftValue(TreeNode *root)
 {
-    if (root->left == NULL && root->right == NULL)
-    {
-        return root->val;
-    }
+    if (root->left == NULL && root->right == NULL) return root->val;
     helper(root);
     return ans;
 }
