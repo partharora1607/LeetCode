@@ -20,7 +20,7 @@ void helper(TreeNode *root, int depth = 0)
     {
         return;
     }
-    if(depth > maxdepth){
+    if(root->left == NULL && root->right == NULL && depth > maxdepth){
         maxdepth = depth;
         ans = root->val;
     }
