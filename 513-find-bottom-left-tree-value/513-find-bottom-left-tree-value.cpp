@@ -14,29 +14,18 @@ public:
 int ans = 0;
 int maxdepth = 0;
 
-void helper(TreeNode *root, int depth = 0, bool isleft = false, bool isright = false)
+void helper(TreeNode *root, int depth = 0)
 {
-    if(root == NULL){
-        return;
-    }
-    if (root->left == NULL && root->right == NULL)
+    if(root == NULL)
     {
-        if (depth > maxdepth)
-        {
-            maxdepth = depth;
-            if (root->left)
-            {
-                ans = root->val;
-            }
-            else
-            {
-                ans = root->val;
-            }
-        }
         return;
     }
-    helper(root->left, depth + 1, true, false); 
-    helper(root->right, depth + 1, false, true);
+    if(depth > maxdepth){
+        maxdepth = depth;
+        ans = root->val;
+    }
+    helper(root->left, depth + 1); 
+    helper(root->right, depth + 1);
 }
 
 int findBottomLeftValue(TreeNode *root)
