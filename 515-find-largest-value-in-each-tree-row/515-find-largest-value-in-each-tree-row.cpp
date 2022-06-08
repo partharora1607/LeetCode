@@ -21,7 +21,8 @@ public:
         }
         if(res.size() > depth)
         {
-            if(root->val > res[depth]){
+            if(root->val > res[depth])
+            {
                 res[depth] = root->val;
             }   
         }
