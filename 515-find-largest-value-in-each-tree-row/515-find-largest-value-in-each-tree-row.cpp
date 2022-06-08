@@ -11,31 +11,39 @@
  */
 class Solution {
 public:
-    
-    vector<int> res;
-    
-    void helper(TreeNode *root , int depth = 0)
-    {       
-        if(root == NULL){
-            return;
-        }
-        if(res.size() > depth)
+vector<int> res;
+
+vector<int> largestValues(TreeNode *root)
+{
+    if (!root)
+        return {};
+    queue<TreeNode *> q1;
+    q1.push(root);
+    q1.push(NULL);
+    int maxdata = INT_MIN;
+    while (!q1.empty())
+    {
+        TreeNode *front = q1.front();
+        q1.pop();
+
+        if (front == NULL)
         {
-            if(root->val > res[depth])
+            res.push_back(maxdata);
+            maxdata = INT_MIN;
+            if (!q1.empty())
             {
-                res[depth] = root->val;
-            }   
+                q1.push(NULL);
+            }
         }
         else
         {
-             res.push_back(root->val);
+            maxdata = max(maxdata, front->val);
+            if (front->left)
+                q1.push(front->left);
+            if (front->right)
+                q1.push(front->right);
         }
-        helper(root->left , depth + 1);
-        helper(root->right , depth + 1);
     }
-    
-    vector<int> largestValues(TreeNode* root) {
-        helper(root);
-        return res;
-    }
+    return res;
+}
 };
