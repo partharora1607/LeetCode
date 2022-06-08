@@ -10,28 +10,37 @@
  * };
  */
 class Solution {
-private:
-    TreeNode* recurse(TreeNode* root){
-        if(!root) return nullptr;
-        if(!(root->left) && !(root->right)) return root;
-        if(!(root->left)) return recurse(root->right);
-        
-        if(!root->right){
-            root->right = root->left;
-            root->left = nullptr;
-            TreeNode* last = recurse(root->right);
-            return last;
-        }
-        
-        TreeNode* right = root->right;
-        root->right = root->left;
-        root->left = nullptr;
-        TreeNode* last = recurse(root->right);
-        last->right = right;
-        return recurse(right);
-    }
 public:
-    void flatten(TreeNode* root) {
-        recurse(root);
+    // HEAD, TAIL
+pair<TreeNode *, TreeNode *> *helper(TreeNode *root)
+{
+    if (root == NULL)
+    {
+        pair<TreeNode *, TreeNode *> *p1 = new pair<TreeNode *, TreeNode *>(NULL, NULL);
+        return p1;
     }
+    if (root->left == NULL && root->right == NULL)
+    {
+        pair<TreeNode *, TreeNode *> *p1 = new pair<TreeNode *, TreeNode *>(root , root);
+        return p1;
+    }
+    pair<TreeNode *, TreeNode *> *leftans = helper(root->left);
+    pair<TreeNode *, TreeNode *> *rightans = helper(root->right);
+    root->left = NULL;
+    if (leftans->first != NULL && leftans->second != NULL)
+    {
+        root->right = leftans->first;
+        leftans->second->right = rightans->first;
+    }
+    else root->right = rightans->first;
+    pair<TreeNode *, TreeNode *> *ans = new pair<TreeNode *, TreeNode *>();
+    ans->first = root;
+    ans->second = rightans->second != NULL ? rightans->second : leftans->second;
+    return ans;
+}
+
+void flatten(TreeNode *root)
+{
+    helper(root);
+}
 };
