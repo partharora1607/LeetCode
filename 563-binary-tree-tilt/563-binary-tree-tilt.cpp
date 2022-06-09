@@ -11,24 +11,28 @@
  */
 class Solution {
 public:
-    int sum = 0;
-int helper(TreeNode *root)
+    // toatl sum , replaced sum
+
+pair<int, int> *helper(TreeNode *root)
 {
     if (root == NULL)
     {
-        return 0;
+        pair<int, int> *p1 = new pair<int, int>(0, 0);
+        return p1;
     }
-    int leftans = helper(root->left);
-    int rightans = helper(root->right);
-    int fans = leftans + rightans + root->val;
-    root->val = abs(leftans - rightans);
-    sum += root->val;
-    return fans;
+
+    pair<int, int> *leftans = helper(root->left);
+    pair<int, int> *rightans = helper(root->right);
+    pair<int, int> *ans = new pair<int, int>();
+
+    ans->first = root->val + leftans->first + rightans->first;
+    root->val = abs(leftans->first - rightans->first);
+    ans->second = leftans->second + rightans->second + root->val;
+    return ans;
 }
 
 int findTilt(TreeNode *root)
 {
-    helper(root);
-    return sum;
+    return helper(root)->second;
 }
 };
