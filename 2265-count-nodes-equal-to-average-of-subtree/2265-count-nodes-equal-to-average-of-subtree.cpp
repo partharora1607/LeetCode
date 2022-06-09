@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int res = 0;
+int res = 0;
 
 // no of nodes , sum
 pair<int, int> *helpeR(TreeNode *root)
