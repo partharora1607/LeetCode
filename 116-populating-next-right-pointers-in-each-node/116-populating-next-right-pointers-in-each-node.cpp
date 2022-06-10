@@ -23,15 +23,14 @@ void connectChildrens(Node *root1, Node *root2 , bool hasSeparation = false)
 {
     if(root1 == NULL) return;
     if (root1) root1->next = root2;
-    if(hasSeparation == true){
-        connectChildrens(root1->right, root2->left , true);
-    }
-    else
+    if(hasSeparation == true)
     {
+        connectChildrens(root1->right, root2->left , true);
+        return;
+    }
     connectChildrens(root1->left, root1->right, false);
     connectChildrens(root2->left, root2->right , false);
     connectChildrens(root1->right, root2->left , true);
-    }
    
     
 }
