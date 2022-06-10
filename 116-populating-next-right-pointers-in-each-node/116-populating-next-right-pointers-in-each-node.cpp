@@ -18,25 +18,28 @@ public:
 
 class Solution {
 public:
-    
-void connectChildrens(Node *root1, Node *root2 , bool hasSeparation = false)
+    Node *connect(Node *root)
 {
-    if(root1 == NULL) return;
-    if (root1) root1->next = root2;
-    if(hasSeparation)
+    Node *Node1 = root;
+    while (Node1 != NULL && Node1->left != NULL)
     {
-        connectChildrens(root1->right, root2->left , true);
-        return;
+        Node *Node2 = Node1; // pointed to leftmost node to traverse
+        while (true)
+        {
+            Node2->left->next = Node2->right;
+            if (Node2->next == NULL)
+            {
+                Node2->right->next = NULL;
+                break;
+            }
+            else
+            {
+                Node2->right->next = Node2->next->left;
+                Node2 = Node2->next;
+            }
+        }
+        Node1 = Node1->left;
     }
-    connectChildrens(root1->left, root1->right, false);
-    connectChildrens(root2->left, root2->right , false);
-    connectChildrens(root1->right, root2->left , true);
-}
-
-Node *connect(Node *root)
-{
-    if(root == NULL) return root;// perfect Tree
-    connectChildrens(root->left, root->right);
     return root;
 }
 };
