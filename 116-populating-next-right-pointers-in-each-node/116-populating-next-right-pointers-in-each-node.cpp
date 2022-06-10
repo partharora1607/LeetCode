@@ -19,42 +19,27 @@ public:
 class Solution {
 public:
     
+void connectChildrens(Node *root1, Node *root2)
+{
+    if(root1 == NULL)
+    {
+        return;
+    }
+    if (root1)
+    {
+        root1->next = root2;
+    }
+    connectChildrens(root1->left, root1->right);
+    connectChildrens(root2->left, root2->right);
+    connectChildrens(root1->right, root2->left);
+}
+
 Node *connect(Node *root)
 {
-    if(!root) return root;
-    queue<Node *> q1;
-    q1.push(root);
-    q1.push(NULL);
-    vector<Node *> res;
-    while (!q1.empty())
-    {
-        Node *front = q1.front();
-        q1.pop();
-        if (front != NULL)
-        {
-            res.push_back(front);
-            if (front->left)
-            {
-                q1.push(front->left);
-            }
-            if (front->right)
-            {
-                q1.push(front->right);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < res.size() - 1; i++)
-            {
-                res[i]->next = res[i + 1];
-            }
-            res.clear();
-            if (!q1.empty())
-            {
-                q1.push(NULL);
-            }
-        }
+    if(root == NULL){
+        return root;
     }
+    connectChildrens(root->left, root->right);
     return root;
 }
 };
