@@ -29,7 +29,6 @@ public:
             Node2->left->next = Node2->right;
             if (Node2->next == NULL)
             {
-                Node2->right->next = NULL;
                 break;
             }
             else
