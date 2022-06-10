@@ -18,26 +18,26 @@ public:
 
 class Solution {
 public:
-    Node *connect(Node *root)
+   Node *connect(Node *root)
 {
-    Node *Node1 = root;
-    while (Node1 != NULL && Node1->left != NULL)
+    Node *temp = root;
+    while (temp != NULL && temp->left != NULL)
     {
-        Node *Node2 = Node1; // pointed to leftmost node to traverse
+        Node *Node = temp;
         while (true)
         {
-            Node2->left->next = Node2->right;
-            if (Node2->next == NULL)
+            Node->left->next = Node->right;
+            if (Node->next == NULL)
             {
                 break;
             }
             else
             {
-                Node2->right->next = Node2->next->left;
-                Node2 = Node2->next;
+                Node->right->next = Node->next->left;
+                Node = Node->next;
             }
         }
-        Node1 = Node1->left;
+        temp = temp->left;
     }
     return root;
 }
