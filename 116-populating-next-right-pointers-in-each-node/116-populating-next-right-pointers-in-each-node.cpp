@@ -21,14 +21,8 @@ public:
     
 void connectChildrens(Node *root1, Node *root2)
 {
-    if(root1 == NULL)
-    {
-        return;
-    }
-    if (root1)
-    {
-        root1->next = root2;
-    }
+    if(root1 == NULL) return;
+    if (root1) root1->next = root2;
     connectChildrens(root1->left, root1->right);
     connectChildrens(root2->left, root2->right);
     connectChildrens(root1->right, root2->left);
@@ -36,9 +30,7 @@ void connectChildrens(Node *root1, Node *root2)
 
 Node *connect(Node *root)
 {
-    if(root == NULL){
-        return root;
-    }
+    if(root == NULL) return root;
     connectChildrens(root->left, root->right);
     return root;
 }
