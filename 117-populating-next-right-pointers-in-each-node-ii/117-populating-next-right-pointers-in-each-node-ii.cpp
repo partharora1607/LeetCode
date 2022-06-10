@@ -18,19 +18,22 @@ public:
 
 class Solution {
 public:
-    Node *connect(Node *root)
+    vector<Node *> res;
+
+Node *connect(Node *root)
 {
-    if(root == NULL){
+    if (root == NULL)
+    {
         return root;
     }
     queue<Node *> q1;
     q1.push(root);
     q1.push(NULL);
-    vector<Node *> res;
     while (!q1.empty())
     {
         Node *front = q1.front();
         q1.pop();
+
         if (front != NULL)
         {
             res.push_back(front);
@@ -58,4 +61,5 @@ public:
     }
     return root;
 }
+
 };
