@@ -30,7 +30,7 @@ void connectChildrens(Node *root1, Node *root2)
 
 Node *connect(Node *root)
 {
-    if(root == NULL) return root;
+    if(root == NULL) return root;// perfect Tree
     connectChildrens(root->left, root->right);
     return root;
 }
