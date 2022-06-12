@@ -11,18 +11,31 @@
  */
 class Solution {
 public:
-    int max_sum=INT_MIN;
-    int max_gain(TreeNode* root)
+    int helper(TreeNode *root)
+{
+    if (root == NULL)
     {
-        if(!root)return 0;
-        int l=max(max_gain(root->left),0);
-        int r=max(max_gain(root->right),0);
-        int new_price=root->val+l+r;
-        max_sum=max(max_sum,new_price);
-        return root->val+max(l,r);
+        return 0;
     }
-    int maxPathSum(TreeNode* root) {
-        max_gain(root);
-        return max_sum;
+    int leftans = helper(root->left);
+    int rightans = helper(root->right);
+    leftans = max(leftans, 0);
+    rightans = max(rightans, 0);
+    return max(leftans , rightans) + root->val;
+}
+
+int maxPathSum(TreeNode *root)
+{
+    if (root == NULL)
+    {
+        return INT_MIN;
     }
+
+    int leftans = maxPathSum(root->left);
+    int rightans = maxPathSum(root->right);
+
+    int op1 = max(helper(root->left), 0) + max(helper(root->right), 0) + root->val;
+
+    return max(op1, max(leftans, rightans));
+}
 };
