@@ -12,7 +12,6 @@
 class Solution {
 public:
 int sum = INT_MIN;
-
 int helper(TreeNode *root)
 {
     if (root == NULL)
