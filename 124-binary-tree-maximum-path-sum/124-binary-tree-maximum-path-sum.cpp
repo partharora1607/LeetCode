@@ -11,31 +11,30 @@
  */
 class Solution {
 public:
-    int helper(TreeNode *root)
+    // maxsumpath(without split), root(split)
+
+pair<int, int> *helper(TreeNode *root)
 {
     if (root == NULL)
     {
-        return 0;
+        pair<int, int> *p1 = new pair<int, int>(INT_MIN, 0);
+        return p1;
     }
-    int leftans = helper(root->left);
-    int rightans = helper(root->right);
-    leftans = max(leftans, 0);
-    rightans = max(rightans, 0);
-    return max(leftans , rightans) + root->val;
+
+    pair<int, int> *leftans = helper(root->left);
+    pair<int, int> *rightans = helper(root->right);
+
+    pair<int, int> *ans = new pair<int, int>();
+    leftans->second = max((leftans->second), 0);
+    rightans->second = max(rightans->second, 0);
+    ans->second = root->val + max(leftans->second, rightans->second);
+    int op1 = leftans->second + rightans->second + root->val;
+    ans->first = max(leftans->first, max(rightans->first, op1));
+    return ans;
 }
 
 int maxPathSum(TreeNode *root)
 {
-    if (root == NULL)
-    {
-        return INT_MIN;
-    }
-
-    int leftans = maxPathSum(root->left);
-    int rightans = maxPathSum(root->right);
-
-    int op1 = max(helper(root->left), 0) + max(helper(root->right), 0) + root->val;
-
-    return max(op1, max(leftans, rightans));
+    return helper(root)->first;
 }
 };
