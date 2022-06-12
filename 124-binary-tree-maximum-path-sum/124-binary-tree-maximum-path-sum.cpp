@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-   int sum = INT_MIN;
+int sum = INT_MIN;
 
 int helper(TreeNode *root)
 {
