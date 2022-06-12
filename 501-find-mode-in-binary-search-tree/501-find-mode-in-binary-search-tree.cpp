@@ -11,13 +11,13 @@
  */
 class Solution {
 public:
-    vector<int> res;
+vector<int> res;
 int max_freq = 0, currfreq = 0, precursor = INT_MIN;
 
 void inorder(TreeNode *root)
 {
     if (root == NULL)
-    {
+    {   
         return;
     }
 
