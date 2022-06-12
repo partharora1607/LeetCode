@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    // maxsumpath(without split), root(split)
+// maxsumpath(without split), root(split)
 
 pair<int, int> *helper(TreeNode *root)
 {
@@ -20,10 +20,8 @@ pair<int, int> *helper(TreeNode *root)
         pair<int, int> *p1 = new pair<int, int>(INT_MIN, 0);
         return p1;
     }
-
     pair<int, int> *leftans = helper(root->left);
     pair<int, int> *rightans = helper(root->right);
-
     pair<int, int> *ans = new pair<int, int>();
     leftans->second = max((leftans->second), 0);
     rightans->second = max(rightans->second, 0);
