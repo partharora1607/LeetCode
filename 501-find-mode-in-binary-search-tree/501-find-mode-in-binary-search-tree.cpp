@@ -11,32 +11,45 @@
  */
 class Solution {
 public:
-    int maxFreq = 0, currFreq = 0, precursor = INT_MIN;
     vector<int> res;
+int max_freq = 0, currfreq = 0, precursor = INT_MIN;
 
-    vector<int> findMode(TreeNode *root)
+void inorder(TreeNode *root)
+{
+    if (root == NULL)
     {
-        inorderTraversal(root);
-        return res;
+        return;
     }
 
-    void inorderTraversal(TreeNode *root)
+    inorder(root->left);
+
+    if (precursor == root->val)
     {
-        if (root == NULL) return; // Stop condition
-        inorderTraversal(root->left); // Traverse left subtree
-        if (precursor == root->val) currFreq++;
-        else currFreq = 1;
-        if (currFreq > maxFreq)
-        {// Current node value has higher frequency than any previous visited
-            res.clear();
-            maxFreq = currFreq;
-            res.push_back(root->val);
-        }
-        else if (currFreq == maxFreq)
-        {// Current node value has a frequency equal to the highest of previous visited
-            res.push_back(root->val);
-        }
-        precursor = root->val; // Update the precursor
-        inorderTraversal(root->right); // Traverse right subtree
+        currfreq++;
     }
+    else
+    {
+        currfreq = 1;
+    }
+
+    if (currfreq > max_freq)
+    {
+        res.clear();
+        max_freq = currfreq;
+        res.push_back(root->val);
+    }
+    else if (currfreq == max_freq)
+    {
+        res.push_back(root->val);
+    }
+    precursor = root->val;
+    inorder(root->right);
+}
+
+vector<int> findMode(TreeNode *root)
+{
+    inorder(root);
+    return res;
+}
+
 };
