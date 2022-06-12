@@ -20,14 +20,19 @@ pair<int, int> *helper(TreeNode *root)
         pair<int, int> *p1 = new pair<int, int>(INT_MIN, 0);
         return p1;
     }
+
     pair<int, int> *leftans = helper(root->left);
     pair<int, int> *rightans = helper(root->right);
+
     pair<int, int> *ans = new pair<int, int>();
+
     leftans->second = max((leftans->second), 0);
     rightans->second = max(rightans->second, 0);
+
     ans->second = root->val + max(leftans->second, rightans->second);
     int op1 = leftans->second + rightans->second + root->val;
     ans->first = max(leftans->first, max(rightans->first, op1));
+    
     return ans;
 }
 
