@@ -20,10 +20,10 @@ int helper(TreeNode *root)
     }
     int rightans = helper(root->right);
     currsum += root->val;
+    int store = root->val;
     root->val = currsum;
     int leftans = helper(root->left);
-    return leftans + currsum;
-    
+    return leftans + rightans + store;
 }
 TreeNode *convertBST(TreeNode *root)
 {
