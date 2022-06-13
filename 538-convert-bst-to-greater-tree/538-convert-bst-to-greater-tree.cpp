@@ -12,22 +12,15 @@
 class Solution {
 public:
 int currsum = 0;
-int helper(TreeNode *root)
-{
-    if (root == NULL)
-    {
-        return 0;
-    }
-    int rightans = helper(root->right);
-    currsum += root->val;
-    int store = root->val;
-    root->val = currsum;
-    int leftans = helper(root->left);
-    return leftans + rightans + store;
-}
 TreeNode *convertBST(TreeNode *root)
 {
-    helper(root);
+    if(root == NULL){
+        return NULL;
+    }
+    convertBST(root->right);
+    currsum += root->val;
+    root->val = currsum;
+    convertBST(root->left);
     return root;
 }
 };
