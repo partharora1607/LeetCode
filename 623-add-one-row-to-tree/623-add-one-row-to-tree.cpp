@@ -15,16 +15,18 @@ public:
 {
     if (root == NULL)
     {
-        return root;
+        return NULL;
     }
     if (depth - curr_depth == 1)
     {
+        TreeNode *leftside = root->left;
+        TreeNode *rightside = root->right;
         TreeNode *l = new TreeNode(val);
         TreeNode *r = new TreeNode(val);
-        l->left = root->left;
-        r->right = root->right;
         root->left = l;
         root->right = r;
+        l->left = leftside;
+        r->right = rightside;
         return root;
     }
     root->left = helper(root->left, val, depth, curr_depth + 1);
@@ -42,4 +44,5 @@ TreeNode *addOneRow(TreeNode *root, int val, int depth)
     }
     return helper(root, val, depth, 1);
 }
+
 };
