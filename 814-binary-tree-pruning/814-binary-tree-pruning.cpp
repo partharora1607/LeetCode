@@ -27,12 +27,6 @@ pair<TreeNode *, bool> *helper(TreeNode *root)
     root->left = leftans->first;
     root->right = rightans->first;
 
-    if (root->val == 1)
-    {
-        pair<TreeNode *, bool> *p1 = new pair<TreeNode *, bool>(root, true);
-        return p1;
-    }
-
     pair<TreeNode *, bool> *ans = new pair<TreeNode *, bool>();
     if (leftans->second == false && rightans->second == false && root->val == 0)
     {
