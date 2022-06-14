@@ -11,7 +11,9 @@
  */
 class Solution {
 public:
-    pair<TreeNode *, bool> *helper(TreeNode *root)
+// node , hasone(flag)
+
+pair<TreeNode *, bool> *helper(TreeNode *root)
 {
     if (root == NULL)
     {
@@ -21,10 +23,10 @@ public:
 
     pair<TreeNode *, bool> *leftans = helper(root->left);
     pair<TreeNode *, bool> *rightans = helper(root->right);
-
+    
     root->left = leftans->first;
     root->right = rightans->first;
-    
+
     if (root->val == 1)
     {
         pair<TreeNode *, bool> *p1 = new pair<TreeNode *, bool>(root, true);
@@ -32,7 +34,6 @@ public:
     }
 
     pair<TreeNode *, bool> *ans = new pair<TreeNode *, bool>();
-
     if (leftans->second == false && rightans->second == false && root->val == 0)
     {
         ans->first = NULL;
