@@ -9,61 +9,51 @@
  */
 class Solution {
 public:
-    vector<int> res;
+    
+vector<int> res;
 
-void Node_at_depth_k(TreeNode *root, int k)
-{
-    if (root == NULL || k < 0   )
-    {
+void Node_at_depth_k(TreeNode *root , int k){
+    if(root == NULL || k < 0){
         return;
     }
-    if (k == 0)
-    {
+    if(k == 0){
         res.push_back(root->val);
         return;
     }
-    Node_at_depth_k(root->left, k - 1);
-    Node_at_depth_k(root->right, k - 1);
+    Node_at_depth_k(root->left , k - 1);
+    Node_at_depth_k(root->right , k - 1);
 }
 
 // return distance , -1 -> not found
 
-int helper(TreeNode *root, TreeNode *target, int k)
-{
-    if (root == NULL)
-    {
+int helper(TreeNode *root , TreeNode *target , int k){
+    if(root == NULL){
         return -1; // node not found
     }
 
-    if (root->val == target->val)
-    {
+    if(root->val == target->val){
         Node_at_depth_k(root, k);
         return 0; // dis fron root to root == 0;
     }
 
-    int ld = helper(root->left, target, k);
-    if (ld != -1)
+    int ld = helper(root->left , target , k);
+    if(ld != -1)
     {
-        if (ld + 1 == k)
-        {
+        if(ld + 1 == k){
             res.push_back(root->val);
         }
-        else
-        {
-            Node_at_depth_k(root->right, k - ld - 2);
+        else{
+            Node_at_depth_k(root->right , k - ld - 2);
         }
-        return ld + 1;
+        return ld+1;
     }
-    int rd = helper(root->right, target, k);
-    if (rd != -1)
-    {
-        if (rd + 1 == k)
-        {
+    int rd = helper(root->right , target , k);
+    if(rd != -1){
+        if(rd + 1 == k){
             res.push_back(root->val);
         }
-        else
-        {
-            Node_at_depth_k(root->left, k - rd - 2);
+        else{
+            Node_at_depth_k(root->left , k -rd - 2);
         }
         return rd + 1;
     }
