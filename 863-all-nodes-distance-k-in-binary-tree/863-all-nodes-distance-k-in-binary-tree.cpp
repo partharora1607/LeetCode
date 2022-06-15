@@ -9,81 +9,70 @@
  */
 class Solution {
 public:
-vector<int> ans;
-void print_node_at_distance_k(TreeNode *root, int k)
+    vector<int> res;
+
+void Node_at_depth_k(TreeNode *root, int k)
 {
-    if (root == NULL)
+    if (root == NULL || k < 0   )
     {
         return;
     }
     if (k == 0)
     {
-        ans.push_back(root->val);
+        res.push_back(root->val);
         return;
     }
-    print_node_at_distance_k(root->left, k - 1);
-    print_node_at_distance_k(root->right, k - 1);
+    Node_at_depth_k(root->left, k - 1);
+    Node_at_depth_k(root->right, k - 1);
 }
 
-vector<TreeNode *> res;
-vector<char> v;
-    
-bool findNode(TreeNode *root, TreeNode *target)
+// return distance , -1 -> not found
+
+int helper(TreeNode *root, TreeNode *target, int k)
 {
     if (root == NULL)
     {
-        return false;
+        return -1; // node not found
     }
+
     if (root->val == target->val)
     {
-        res.push_back(root);
-        return true;
+        Node_at_depth_k(root, k);
+        return 0; // dis fron root to root == 0;
     }
-    bool leftans = findNode(root->left, target);
-    if (leftans == true)
-    {
-        res.push_back(root);
-        v.push_back('L');
-        return true;
-    }
-    bool rightans = findNode(root->right, target);
-    if (rightans == true)
-    {
-        res.push_back(root);
-        v.push_back('R');
-        return true;
-    }
-    return false;
-}
 
-
-vector<int> distanceK(TreeNode *root, TreeNode *target, int k)
-{
-    findNode(root, target);
-    print_node_at_distance_k(res[0], k);
-    // k--;
-    for (int i = 1; i < res.size(); i++)
+    int ld = helper(root->left, target, k);
+    if (ld != -1)
     {
-        k--;
-        if(k == 0){
-            ans.push_back(res[i]->val);
-        }
-        else if(k > 0)
+        if (ld + 1 == k)
         {
-            if (v[i - 1] == 'L')
-            {
-                print_node_at_distance_k(res[i]->right, k - 1);
-            }
-            else if (v[i - 1] == 'R')
-            {
-                print_node_at_distance_k(res[i]->left , k - 1);
-            }    
+            res.push_back(root->val);
         }
         else
         {
-            break;
+            Node_at_depth_k(root->right, k - ld - 2);
         }
+        return ld + 1;
     }
-    return ans;
+    int rd = helper(root->right, target, k);
+    if (rd != -1)
+    {
+        if (rd + 1 == k)
+        {
+            res.push_back(root->val);
+        }
+        else
+        {
+            Node_at_depth_k(root->left, k - rd - 2);
+        }
+        return rd + 1;
+    }
+    return -1;
+}
+
+vector<int> distanceK(TreeNode *root, TreeNode *target, int k)
+{
+    helper(root, target, k);
+    return res;
 }
 };
