@@ -11,16 +11,25 @@
  */
 class Solution {
 public:
-    bool isCompleteTree(TreeNode* root) {
-    queue<TreeNode*> q;
+bool isCompleteTree(TreeNode *root)
+{
+    queue<TreeNode *> q;
     q.push(root);
     bool k = false;
-    while(!q.empty()){
-        TreeNode* x = q.front();
+    while (!q.empty())
+    {
+        TreeNode *x = q.front();
         q.pop();
-        if(x==NULL) k = true;
-        else{
-            if(k ==true) return false;
+        if (x == NULL)
+        {
+            k = true;
+        }
+        else
+        {
+            if (k == true)
+            {
+                return false;
+            }
             q.push(x->left);
             q.push(x->right);
         }
