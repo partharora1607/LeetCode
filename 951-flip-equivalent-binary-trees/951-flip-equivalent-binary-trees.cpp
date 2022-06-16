@@ -22,6 +22,7 @@ public:
     if(root1->val != root2->val){
         return false;
     }
+    // as if my binary tree is same that means no flip;         
     return flipEquiv(root1->left , root2->right) && flipEquiv(root1->right , root2->left) || flipEquiv(root1->left , root2->left) && flipEquiv(root1->right , root2->right);
 }
 };
