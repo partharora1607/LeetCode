@@ -1,9 +1,6 @@
 class Solution {
 public:
    void helper(vector<int> &ar ,int si , int ei){
-       if(ei >= ar.size()){
-           return;
-       }
         int i = si , j = ei;
         while(i < j){
             swap(ar[i++] , ar[j--]);
