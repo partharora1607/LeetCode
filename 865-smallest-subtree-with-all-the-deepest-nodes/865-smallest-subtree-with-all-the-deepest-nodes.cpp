@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    // root , depth     
     pair<TreeNode *, int> *helper(TreeNode *root)
 {
     if (root == NULL)
@@ -24,21 +25,15 @@ public:
     pair<TreeNode *, int> *ans = new pair<TreeNode *, int>();
     ans->second = max(leftans->second , rightans->second) + 1;
 
-    if (leftans->second > rightans->second)
-    {
-        ans->first = leftans->first;
-        // ans->second = leftans->second + 1;
-    }
-    else if (rightans->second > leftans->second)
-    {
-        ans->first = rightans->first;
-        // ans->second = rightans->second + 1;
-    }
-    else
-    {
+    if(leftans->second == rightans->second){
         ans->first = root;
-        // ans->second = leftans->second + 1;
     }
+    else if(leftans->second > rightans->second){
+        ans->first = leftans->first;
+    }
+    else{
+        ans->first = rightans->first;
+    }      
     return ans;
 }
 
