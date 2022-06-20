@@ -22,21 +22,22 @@ public:
     pair<TreeNode *, int> *rightans = helper(root->right);
 
     pair<TreeNode *, int> *ans = new pair<TreeNode *, int>();
+    ans->second = max(leftans->second , rightans->second) + 1;
 
     if (leftans->second > rightans->second)
     {
         ans->first = leftans->first;
-        ans->second = leftans->second + 1;
+        // ans->second = leftans->second + 1;
     }
     else if (rightans->second > leftans->second)
     {
         ans->first = rightans->first;
-        ans->second = rightans->second + 1;
+        // ans->second = rightans->second + 1;
     }
     else
     {
         ans->first = root;
-        ans->second = leftans->second + 1;
+        // ans->second = leftans->second + 1;
     }
     return ans;
 }
