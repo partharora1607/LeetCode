@@ -13,18 +13,14 @@ class Solution {
 public:
     int ans = 0;
 
-int helper(TreeNode *root , TreeNode * parent)
+int helper(TreeNode *root )
 {
     if(!root) return 1;
     if(!root->left && !root->right){
-        if(parent == NULL){
-            ans++;
-            return 0;
-        }
         return -1;// need camera
     }
-    int leftans = helper(root->left , root);
-    int rightans = helper(root->right , root);
+    int leftans = helper(root->left);
+    int rightans = helper(root->right);
 
     if(leftans == -1 || rightans == -1){
         ans++;
@@ -43,7 +39,7 @@ int helper(TreeNode *root , TreeNode * parent)
 
 int minCameraCover(TreeNode *root)
 {
- int a = helper(root , NULL);
+ int a = helper(root);
     if(a < 0){
         ans++;
     }
