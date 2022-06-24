@@ -11,7 +11,12 @@
  */
 class Solution {
 public:
-    int ans = 0;
+    
+// 0 -> have camera
+// 1-> vistited / covered
+// -1 -> need camera
+
+int ans = 0;
 
 int helper(TreeNode *root )
 {
