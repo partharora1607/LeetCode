@@ -11,53 +11,60 @@
  */
 class Solution {
 public:
+    map<int, vector<int>> mymap;
 
-vector<vector<int>> verticalTraversal(TreeNode* root) {
-     vector<vector<int>> ans;
-     if(root==NULL)
-         return ans;
-     //map with mapping horizonatl distance to mapp of level of nodes
-     //we want in output sorted order of hd so take ordered map
-     map<int, map<int,vector<int>>> m;
-     //queue with node and hd,leve
-     queue<pair<TreeNode*, pair<int,int>>> q;
-     //root will hd as 0 and level also 0
-     q.push({root,{0,0}});
-     while(!q.empty())
-     {
-         pair<TreeNode*,pair<int,int>> temp=q.front();
-         q.pop();
-         //Node
-         TreeNode* curr=temp.first;
-         //hd
-         int hd=temp.second.first;
-         //level
-         int level=temp.second.second;
-         //push into map
-         m[hd][level].push_back(curr->val);
-         if(curr->left!=NULL)
-         {
-             q.push({curr->left,{hd-1,level+1}});
-         }
-         if(curr->right!=NULL)
-         {
-             q.push({curr->right,{hd+1,level+1}});
-         }
-     }
-     for(auto it:m)
-     {
-         vector<int> v;
-         for(auto j: it.second)
-         {
-             //if hd and level are same just sort them in increasing order
-             sort(j.second.begin(),j.second.end());    
-             for(auto k: j.second)
-                 {
-                     v.push_back(k);        
-                 }
-         }
-         ans.push_back(v);
-     }
-     return ans;  
- }
+void helper(TreeNode *root)
+{
+    if (!root)
+        return;
+    // node , col
+    queue<pair<TreeNode *, int>> q1;
+
+    q1.push({root, 0});
+    vector<pair<int, int>> v;
+    while (!q1.empty())
+    {
+        int n = q1.size();
+        for (int i = 0; i < n; i++)
+        {
+            pair<TreeNode *, int> p1 = q1.front();
+            q1.pop();
+
+            TreeNode *front = p1.first;
+            int col = p1.second;
+
+            v.push_back({front->val, col});
+
+            if (front->left)
+            {
+                q1.push({front->left, col - 1});
+            }
+
+            if (front->right)
+            {
+                q1.push({front->right, col + 1});
+            }
+        }
+        sort(v.begin(), v.end());
+        for (int i = 0; i < v.size(); i++)
+        {
+            int f = v[i].second; // col
+            int s = v[i].first;  // val
+            mymap[f].push_back(s);
+        }
+        v.clear();
+    }
+}
+vector<vector<int>> verticalTraversal(TreeNode *root)
+{
+    helper(root);
+    vector<vector<int>> v;
+    map<int, vector<int>>::iterator it = mymap.begin();
+    while (it != mymap.end())
+    {
+        v.push_back(it->second);
+        it++;
+    }
+    return v;
+}
 };
