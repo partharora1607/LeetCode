@@ -11,8 +11,7 @@
  */
 class Solution {
 public:
-    int res = 0;
-
+int res = 0;
 // leftans , rightans
 pair<int, int> *helper(TreeNode *root)
 {
