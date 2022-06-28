@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int res = 0;  
+int res = 0;  
 
 // min , max
 pair<int,int> *helper(TreeNode *root){
