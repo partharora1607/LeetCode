@@ -21,19 +21,29 @@
  */
 class Solution {
 public:
-   
     bool checkPath(ListNode *head, TreeNode *root)
+{
+    if (head == NULL)
     {
-    if (!head)
         return true;
-    if (!root || head->val != root->val)
-        return false;
-    return checkPath(head->next, root->left) || checkPath(head->next, root->right);
     }
-    bool isSubPath(ListNode *head, TreeNode *root)
+    if (root == NULL || head->val != root->val)
     {
-    if (!root)
         return false;
-    return (head->val == root->val && checkPath(head, root)) || isSubPath(head, root->left) || isSubPath(head, root->right);
     }
+    return checkPath(head->next, root->left) || checkPath(head->next, root->right);
+}
+bool isSubPath(ListNode *head, TreeNode *root)
+{
+    if (root == NULL)
+    {
+        return false;
+    }
+    if (head->val == root->val && checkPath(head, root))
+    {
+        return true;
+    }
+    return isSubPath(head, root->left) || isSubPath(head, root->right);
+}
+
 };
