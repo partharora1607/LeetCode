@@ -18,13 +18,11 @@ public:
         return true;
     }
 
-    if (sumsofar + root->val < limit && root->left == NULL && !root->right)
-    {
+    if(!root->left && !root->right){
+        if(sumsofar + root->val >= limit){
+            return false;
+        }
         return true;
-    }
-    if (sumsofar + root->val >= limit && !root->left && !root->right)
-    {
-        return false;
     }
 
     bool left = helper(root->left, limit, sumsofar + root->val);
