@@ -11,6 +11,12 @@
  */
 class Solution {
 public:
+    
+//     palindrome - > 1221 -> even-> freq of each element is even
+//     12321 -> odd -> freq of each element is even except 1
+//     Then it is a Palindrome :)
+    
+    
 int ans = 0;
 
 bool is_pseudo_palindromic(unordered_map<int, int> &mymap)
