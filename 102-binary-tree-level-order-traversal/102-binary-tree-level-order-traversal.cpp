@@ -11,34 +11,25 @@
  */
 class Solution {
 public:
-    // Method - 1 (using a Queue + NULL for level)
-
 vector<vector<int>> res;
 
 void helper(TreeNode *root){
     if(!root) return;
     queue<TreeNode *> q1;
     q1.push(root);
-    q1.push(NULL);
     vector<int> ar;
     while(!q1.empty()){
-        TreeNode *front = q1.front();
-        q1.pop();
-
-        if(front!= NULL){
-            ar.push_back(front->val);
-            if(front->left){
-                q1.push(front->left);
-            }
+        int n = q1.size();
+        for (int i = 0; i < n; i++)
+        {   
+           TreeNode *front = q1.front();
+           q1.pop();
+           ar.push_back(front->val);
+            if(front->left) q1.push(front->left);
             if(front->right) q1.push(front->right);
-        } 
-        else{
-            res.push_back(ar);
-            ar.clear();
-            if(!q1.empty()){
-                q1.push(NULL);
-            }
         }
+        res.push_back(ar);
+        ar.clear();
     }
 }
 
@@ -47,4 +38,5 @@ vector<vector<int>> levelOrder(TreeNode *root)
     helper(root);
     return res;
 }
+
 };
