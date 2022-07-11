@@ -11,21 +11,48 @@
  */
 class Solution {
 public:
-vector<vector<int>> ret;
+    // Method - 1 (using a Queue + NULL for level)
 
-void buildVector(TreeNode *root, int depth)
+vector<vector<int>> res;
+
+void helper(TreeNode *root)
 {
-    if(root == NULL) return;
-    if(ret.size() == depth)
-        ret.push_back(vector<int>());
-    
-    ret[depth].push_back(root->val);
-    buildVector(root->left, depth + 1);
-    buildVector(root->right, depth + 1);
+    if(!root) return;
+
+    queue<TreeNode *> q1;
+
+    q1.push(root);
+    q1.push(NULL);
+
+    vector<int> ans;
+
+    while(!q1.empty()){
+        TreeNode *front = q1.front();
+        q1.pop();
+
+        if(front){
+            ans.push_back(front->val);
+            if(front->left){
+                q1.push(front->left);
+            }
+            if(front->right){
+                q1.push(front->right);
+            }
+        }
+        else{
+            res.push_back(ans);
+            ans.clear();
+            if(!q1.empty()){
+                q1.push(NULL);
+            }
+        }
+    }
 }
 
-vector<vector<int> > levelOrder(TreeNode *root) {
-    buildVector(root, 0);
-    return ret;
+vector<vector<int>> levelOrder(TreeNode *root)
+{
+    helper(root);
+    return res;
 }
+
 };
