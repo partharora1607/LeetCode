@@ -11,11 +11,26 @@
  */
 class Solution {
 public:
-    bool isSameTree(TreeNode *p, TreeNode *q)
-{
-    if(!p && !q) return true;
-    if(!p || !q) return false;
-    return isSameTree(p->left , q->left) && isSameTree(p->right , q->right) && (p->val == q->val);
+vector<int> v1;
+vector<int> v2;
+void inorder(TreeNode *root , vector<int>& v){
+    if(root == NULL)
+    {
+        return;
+    }
+    v.push_back(-1);
+    inorder(root->left , v);
+    v.push_back(0);
+    v.push_back(root->val);
+    v.push_back(1);
+    inorder(root->right , v);
 }
 
+
+bool isSameTree(TreeNode *p, TreeNode *q)
+{
+    inorder(p , v1);
+    inorder(q , v2);
+    return v1 == v2;
+}
 };
