@@ -15,33 +15,26 @@ public:
 
 vector<vector<int>> res;
 
-void helper(TreeNode *root)
-{
+void helper(TreeNode *root){
     if(!root) return;
-
     queue<TreeNode *> q1;
-
     q1.push(root);
     q1.push(NULL);
-
-    vector<int> ans;
-
+    vector<int> ar;
     while(!q1.empty()){
         TreeNode *front = q1.front();
         q1.pop();
 
-        if(front){
-            ans.push_back(front->val);
+        if(front!= NULL){
+            ar.push_back(front->val);
             if(front->left){
                 q1.push(front->left);
             }
-            if(front->right){
-                q1.push(front->right);
-            }
-        }
+            if(front->right) q1.push(front->right);
+        } 
         else{
-            res.push_back(ans);
-            ans.clear();
+            res.push_back(ar);
+            ar.clear();
             if(!q1.empty()){
                 q1.push(NULL);
             }
@@ -54,5 +47,4 @@ vector<vector<int>> levelOrder(TreeNode *root)
     helper(root);
     return res;
 }
-
 };
