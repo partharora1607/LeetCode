@@ -27,8 +27,13 @@ public:
         return res;
     }
 
+    // left ans                         rightans
+    // 1     2                         4        5
+    //  2  1                              5   4
+
     for (int i = si; i <= ei; i++)
     {
+        // 1 2  3  4 5
         vector<TreeNode *> leftans = helper(si, i - 1);
         vector<TreeNode *> rigthans = helper(i + 1, ei);
 
