@@ -11,42 +11,30 @@
  */
 class Solution {
 public:
-    TreeNode *buildTree(vector<int> &preorder, int psi, int pei, vector<int> &inorder, int isi, int iei)
-{
-    if (psi > pei)
-    {
-        return NULL;
-    }
-
-    TreeNode *root = new TreeNode(preorder[psi]);
-    int lpsi = psi + 1;
-    int rpei = pei;
-    int lisi = isi;
-    int riei = iei;
-
-    int count = -1;
-    for (int i = isi; i <= iei; i++)
-    {
-        if (inorder[i] == root->val)
-        {
-            count = i;
-            break;
-        }
-    }
-
-    int liei = count - 1;
-    int risi = count + 1;
-
-    int lpei = lpsi + liei - lisi;
-    int rpsi = lpei + 1;
-
-    root->left = buildTree(preorder, lpsi, lpei, inorder, lisi, liei);
-    root->right = buildTree(preorder, rpsi, rpei, inorder, risi, riei);
-    return root;
-}
-
 TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
 {
-    return buildTree(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
+    int rootIdx = 0;
+    unordered_map<int, int> hmap;
+    for (int i = 0; i < inorder.size(); i++)
+    {
+        hmap[inorder[i]] = i;
+        // value -> index mapping for inorder array
+    }
+    return build(preorder, inorder, rootIdx, 0, inorder.size() - 1, hmap);
+}
+
+TreeNode *build(vector<int> &preorder, vector<int> &inorder, int &rootIdx, int left, int right, unordered_map<int, int> &hmap)
+{
+    if (left > right)
+        return nullptr;
+
+    int pivot = hmap[preorder[rootIdx]];
+    TreeNode *node = new TreeNode(inorder[pivot]); // inorder[pivot] == prorder[rootIdx]
+    rootIdx++;
+
+    node->left = build(preorder, inorder, rootIdx, left, pivot - 1, hmap);
+    node->right = build(preorder, inorder, rootIdx, pivot + 1, right, hmap);
+
+    return node;
 }
 };
