@@ -21,6 +21,6 @@ public:
 
 bool isValidBST(TreeNode *root)
 {
-    return inRange(root , -2147483649 , 2147483649);
+    return inRange(root , -3000000000 , 3000000000);
 }
 };
