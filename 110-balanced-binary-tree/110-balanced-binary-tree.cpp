@@ -11,17 +11,17 @@
  */
 class Solution {
 public:
-    // isbalanced , height
+// isbalanced , height
 pair<bool, int> *helper(TreeNode *root)
 {
-    if (root == NULL)
-    {
-        pair<bool, int> *p1 = new pair<bool, int>(true, 0);
+    if (root == NULL){
+        pair<bool , int> *p1 = new pair<bool , int>(true , 0);
         return p1;
     }
 
     pair<bool, int> *leftans = helper(root->left);
     pair<bool, int> *rightans = helper(root->right);
+
     pair<bool, int> *ans = new pair<bool, int>();
 
     ans->first = (leftans->first && rightans->first) && (abs(leftans->second - rightans->second) <= 1);
