@@ -21,16 +21,16 @@
  */
 class Solution {
 public:
-    TreeNode *sortedListToBST(ListNode *head, ListNode *tail = NULL)// default parameter
+TreeNode *helper(ListNode *head, ListNode *tail)
 {
     if (head == tail)
     {
         return NULL;
     }
 
-    // Calculating mid value for the root.     
-        
-    ListNode *fast = head, *slow = head;
+    ListNode *fast = head;
+    ListNode *slow = head;
+
     while (fast != tail && fast->next != tail)
     {
         fast = fast->next->next;
@@ -38,8 +38,13 @@ public:
     }
 
     TreeNode *root = new TreeNode(slow->val);
-    root->left = sortedListToBST(head, slow);
-    root->right = sortedListToBST(slow->next, tail);
+    root->left = helper(head, slow);
+    root->right = helper(slow->next, tail);
     return root;
+}
+
+TreeNode *sortedListToBST(ListNode *head)
+{
+    return helper(head, NULL);
 }
 };
