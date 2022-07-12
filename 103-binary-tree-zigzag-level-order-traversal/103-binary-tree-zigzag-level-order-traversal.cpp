@@ -11,56 +11,65 @@
  */
 class Solution {
 public:
+        vector<vector<int>> res;
 
-vector<vector<int>> zigzagLevelOrder(TreeNode *root)
+void helper(TreeNode *root)
 {
-    vector<vector<int>> v;
-    if (root == NULL)
-    {
-        return v;
-    }
+    // edge case
+    if (!root)
+        return;
+
     stack<TreeNode *> s1;
     stack<TreeNode *> s2;
 
+    vector<int> ar;
+
     s1.push(root);
+
     while (!s1.empty() || !s2.empty())
     {
-        vector<int> ans;
         while (!s1.empty())
         {
-            TreeNode *top1 = s1.top();
+            TreeNode *top = s1.top();
             s1.pop();
-            ans.push_back(top1->val);
-            if (top1->left != NULL)
+
+            if (top)
             {
-                s2.push(top1->left);
-            }
-            if (top1->right != NULL)
-            {
-                s2.push(top1->right);
+                ar.push_back(top->val);
+                if (top->left)
+                    s2.push(top->left);
+                if (top->right)
+                    s2.push(top->right);
             }
         }
-        v.push_back(ans);
-        vector<int> ans2;
+        if(ar.size() > 0){
+            res.push_back(ar);
+        }
+        ar.clear();
         while (!s2.empty())
         {
-            TreeNode *top2 = s2.top();
+            TreeNode *top = s2.top();
             s2.pop();
-            ans2.push_back(top2->val);
-            if (top2->right != NULL)
+
+            if (top)
             {
-                s1.push(top2->right);
-            }
-            if (top2->left != NULL)
-            {
-                s1.push(top2->left);
+                ar.push_back(top->val);
+                if (top->right)
+                    s1.push(top->right);
+                if (top->left)
+                    s1.push(top->left);
             }
         }
-        if (ans2.size() != 0)
-        {
-            v.push_back(ans2);
+        if(ar.size() > 0){
+            res.push_back(ar);
         }
+        ar.clear();
     }
-    return v;
+}
+
+vector<vector<int>> zigzagLevelOrder(TreeNode *root)
+{
+    helper(root);
+    return res;
 }
 };
