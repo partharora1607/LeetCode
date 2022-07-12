@@ -11,32 +11,27 @@
  */
 class Solution {
 public:
-vector<vector<int>> res;
+    map<int, vector<int>> mymap;
 
-void helper(TreeNode *root){
-    if(!root) return;
-    queue<TreeNode *> q1;
-    q1.push(root);
-    vector<int> ar;
-    while(!q1.empty()){
-        int n = q1.size();
-        for (int i = 0; i < n; i++)
-        {   
-           TreeNode *front = q1.front();
-           q1.pop();
-           ar.push_back(front->val);
-            if(front->left) q1.push(front->left);
-            if(front->right) q1.push(front->right);
-        }
-        res.push_back(ar);
-        ar.clear();
-    }
+void helper(TreeNode *root, int level)
+{
+    if (!root)
+        return;
+    mymap[level].push_back(root->val);
+    helper(root->left, level + 1);
+    helper(root->right, level + 1);
 }
 
 vector<vector<int>> levelOrder(TreeNode *root)
 {
-    helper(root);
-    return res;
+    vector<vector<int>> ar;
+    helper(root, 0);
+    map<int, vector<int>>::iterator it = mymap.begin();
+    while (it != mymap.end())
+    {
+        ar.push_back(it->second);
+        it++;
+    }
+    return ar;
 }
-
 };
