@@ -11,16 +11,14 @@
  */
 class Solution {
 public:
-    bool inRange(TreeNode *root , long  minV , long  maxV){
-    if(!root){return true;}
-    if(root->val <= minV || root->val >= maxV){
-        return false;
-    }
-    return inRange(root->left , minV , root->val) && inRange(root->right , root->val , maxV);
+bool isValidBST(TreeNode* root) {
+    return isValidBST(root, NULL, NULL);
 }
 
-bool isValidBST(TreeNode *root)
-{
-    return inRange(root , -3000000000 , 3000000000);
+bool isValidBST(TreeNode* root, TreeNode* minNode, TreeNode* maxNode) {
+    if(!root) return true;
+    if(minNode && root->val <= minNode->val || maxNode && root->val >= maxNode->val)
+        return false;
+    return isValidBST(root->left, minNode, root) && isValidBST(root->right, root, maxNode);
 }
 };
