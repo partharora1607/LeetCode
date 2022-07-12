@@ -11,7 +11,8 @@
  */
 class Solution {
 public:
-        pair<bool, int> *helper(TreeNode *root)
+    // isbalanced , height
+pair<bool, int> *helper(TreeNode *root)
 {
     if (root == NULL)
     {
@@ -32,5 +33,4 @@ bool isBalanced(TreeNode *root)
 {
     return helper(root)->first;
 }
-
 };
