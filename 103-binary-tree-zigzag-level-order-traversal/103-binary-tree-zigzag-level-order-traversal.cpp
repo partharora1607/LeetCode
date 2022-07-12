@@ -33,14 +33,12 @@ void helper(TreeNode *root)
             TreeNode *top = s1.top();
             s1.pop();
 
-            if (top)
-            {
                 ar.push_back(top->val);
                 if (top->left)
                     s2.push(top->left);
                 if (top->right)
                     s2.push(top->right);
-            }
+            
         }
         if(ar.size() > 0){
             res.push_back(ar);
@@ -51,14 +49,12 @@ void helper(TreeNode *root)
             TreeNode *top = s2.top();
             s2.pop();
 
-            if (top)
-            {
                 ar.push_back(top->val);
                 if (top->right)
                     s1.push(top->right);
                 if (top->left)
                     s1.push(top->left);
-            }
+            
         }
         if(ar.size() > 0){
             res.push_back(ar);
