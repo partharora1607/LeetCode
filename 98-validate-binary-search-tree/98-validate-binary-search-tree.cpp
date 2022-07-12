@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    bool inRange(TreeNode *root , long long minV , long long maxV){
+    bool inRange(TreeNode *root , long  minV , long  maxV){
     if(!root){return true;}
     if(root->val <= minV || root->val >= maxV){
         return false;
