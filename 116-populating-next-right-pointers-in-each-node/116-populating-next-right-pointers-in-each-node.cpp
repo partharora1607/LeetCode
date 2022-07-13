@@ -18,27 +18,25 @@ public:
 
 class Solution {
 public:
-   Node *connect(Node *root)
-{
-    Node *temp = root;
-    while (temp != NULL && temp->left != NULL)
-    {
-        Node *Node = temp;
-        while (true)
-        {
-            Node->left->next = Node->right;
-            if (Node->next == NULL)
-            {
-                break;
-            }
-            else
-            {
-                Node->right->next = Node->next->left;
-                Node = Node->next;
-            }
-        }
-        temp = temp->left;
+   void helper(Node *root1 , Node *root2){
+    if(root1 == NULL){
+        return;
     }
+    root1->next = root2;
+    helper(root1->left , root1->right);
+    helper(root2->left , root2->right);
+    helper(root1->right , root2->left);
+}
+
+Node *connect(Node *root)
+{
+    if(root == NULL){
+        return root;
+    }
+    if(root->left == NULL){
+        return root;
+    }
+    helper(root->left , root->right);
     return root;
 }
 };
