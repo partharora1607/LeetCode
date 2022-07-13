@@ -11,29 +11,14 @@
  */
 class Solution {
 public:
-   int sum = 0;
-int ans = 0;
-void helper(TreeNode *root)
+        
+    int sumNumbers(TreeNode *root , int sum = 0)
 {
-    if (root == NULL)
-    {
-        return;
-    }
+    if(root == NULL) return 0;
     sum = sum * 10 + root->val;
-    if (!root->left && !root->right)
-    {
-        ans += sum;
-        sum /= 10;
-        return;
+    if(root->left == NULL && root->right == NULL){
+        return sum;
     }
-    helper(root->left);
-    helper(root->right);
-    sum /= 10;
-}
-
-int sumNumbers(TreeNode *root)
-{
-    helper(root);
-    return ans;
+    return sumNumbers(root->left , sum) + sumNumbers(root->right , sum);
 }
 };
