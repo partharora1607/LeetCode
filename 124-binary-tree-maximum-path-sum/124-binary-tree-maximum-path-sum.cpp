@@ -11,18 +11,23 @@
  */
 class Solution {
 public:
-int sum = INT_MIN;
-int helper(TreeNode *root)
-{
-    if (root == NULL)
-    {
+    int sum = INT_MIN;
+
+int helper(TreeNode *root){
+    if(root == NULL){
         return 0;
     }
-    int leftans = max(helper(root->left), 0);
-    int rightans = max(helper(root->right), 0);
-    int ans = root->val + leftans + rightans;
-    sum = max(sum, ans);
-    return root->val + max(leftans, rightans);
+
+    int leftans = helper(root->left);
+    int rightans = helper(root->right);
+
+    leftans = max(leftans , 0);
+    rightans = max(rightans , 0);
+
+    sum = max(root->val + leftans + rightans , sum);
+
+    return root->val + max(leftans , rightans);
+
 }
 
 int maxPathSum(TreeNode *root)
