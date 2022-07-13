@@ -11,31 +11,42 @@
  */
 class Solution {
 public:
-    // HEAD, TAIL
+    // head, tail
+// head, tail
 pair<TreeNode *, TreeNode *> *helper(TreeNode *root)
 {
-    if (root == NULL)
-    {
-        pair<TreeNode *, TreeNode *> *p1 = new pair<TreeNode *, TreeNode *>(NULL, NULL);
-        return p1;
-    }
-    if (root->left == NULL && root->right == NULL)
-    {
-        pair<TreeNode *, TreeNode *> *p1 = new pair<TreeNode *, TreeNode *>(root , root);
-        return p1;
-    }
+    if (!root)
+        return new pair<TreeNode *, TreeNode *>(NULL, NULL);
+    if (!root->left && !root->right)
+        return new pair<TreeNode *, TreeNode *>(root, root);
+
     pair<TreeNode *, TreeNode *> *leftans = helper(root->left);
     pair<TreeNode *, TreeNode *> *rightans = helper(root->right);
+
+    pair<TreeNode *, TreeNode *> *ans = new pair<TreeNode *, TreeNode *>();
+
     root->left = NULL;
-    if (leftans->first != NULL && leftans->second != NULL)
+
+    ans->first = root;
+    if (leftans->first == NULL)
+    {
+        root->right = rightans->first;
+        ans->second = rightans->second;
+        return ans;
+    }
+    else
     {
         root->right = leftans->first;
         leftans->second->right = rightans->first;
+        if (rightans->first != NULL)
+        {
+            ans->second = rightans->second;
+        }
+        else
+        {
+            ans->second = leftans->second;
+        }
     }
-    else root->right = rightans->first;
-    pair<TreeNode *, TreeNode *> *ans = new pair<TreeNode *, TreeNode *>();
-    ans->first = root;
-    ans->second = rightans->second != NULL ? rightans->second : leftans->second;
     return ans;
 }
 
