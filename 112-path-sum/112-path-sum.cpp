@@ -15,10 +15,7 @@ public:
 {
     if(!root) return false;
     sum += root->val;
-    if(!root->left && !root->right){
-        if(sum == targetSum) return true;
-        else return false;
-    }
+    if(!root->left && !root->right && targetSum == sum) return true;
     return hasPathSum(root->left , targetSum , sum) || hasPathSum(root->right , targetSum , sum);
 }
 };
