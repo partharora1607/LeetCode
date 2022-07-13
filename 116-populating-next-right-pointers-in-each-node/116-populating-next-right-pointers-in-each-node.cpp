@@ -18,25 +18,30 @@ public:
 
 class Solution {
 public:
-   void helper(Node *root1 , Node *root2){
-    if(root1 == NULL){
-        return;
-    }
-    root1->next = root2;
-    helper(root1->left , root1->right);
-    helper(root2->left , root2->right);
-    helper(root1->right , root2->left);
-}
-
-Node *connect(Node *root)
+        Node *connect(Node *root)
 {
-    if(root == NULL){
+    if (root == NULL)
         return root;
-    }
-    if(root->left == NULL){
+    if (root->left == NULL && root->right == NULL)
         return root;
+    queue<Node *> q1;
+    q1.push(root);
+    while (!q1.empty())
+    {
+        int n = q1.size();
+        for (int i = 0; i < n; i++)
+        {
+            Node *front = q1.front();
+            q1.pop();
+
+            if (!q1.empty() && i < n - 1)
+            {
+                front->next = q1.front();
+            }
+            if(front->left) q1.push(front->left);
+            if(front->right) q1.push(front->right);
+        }
     }
-    helper(root->left , root->right);
     return root;
 }
 };
