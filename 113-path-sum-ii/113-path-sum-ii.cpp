@@ -12,25 +12,28 @@
 class Solution {
 public:
 vector<vector<int>> res;
+vector<int> ar;
+int sum = 0;
 
-void helper(TreeNode *root , int targetsum , int sum , vector<int> &ar){
+void helper(TreeNode *root , int targetsum){
     if(!root) return;
     sum += root->val;
     ar.push_back(root->val);
-    if(root->left == NULL && root->right == NULL && targetsum == sum){
+    if(root->left == NULL && root->right == NULL && sum == targetsum){
         res.push_back(ar);
         ar.pop_back();
+        sum -= root->val;
         return;
-    }   
-    helper(root->left , targetsum, sum , ar);
-    helper(root->right , targetsum , sum , ar);
+    }
+    helper(root->left , targetsum);
+    helper(root->right , targetsum);
     ar.pop_back();
+    sum -= root->val;
 }
 
 vector<vector<int>> pathSum(TreeNode *root, int targetSum)
 {
-    vector<int> ar;
-    helper(root , targetSum , 0 , ar);
+    helper(root , targetSum);
     return res;
 }
 };
