@@ -18,35 +18,27 @@ public:
 
 class Solution {
 public:
-    Node *connect(Node *root)
-{
-    // edge
+       // int -> level / depth , vector<int> -> nodes at that level
+unordered_map<int, vector<Node *>> mymap;
 
-    if (!root)
-        return root;
-    if (!root->left && !root->right)
-        return root;
-
-    queue<Node *> q1;
-    q1.push(root);
-
-    while (!q1.empty())
-    {
-
-        int n = q1.size();
-        for (int i = 0; i < n; i++)
-        {
-            Node *front = q1.front();
-            q1.pop();
-
-            if(!q1.empty() && i < n - 1){
-                front->next = q1.front();
-            }
-
-            if(front->left) q1.push(front->left);
-            if(front->right) q1.push(front->right);
-        }
+void dfs(Node *root , int level){
+    if(!root) return;
+    if(mymap[level].size() == 0){
+        // vector is empty
+        mymap[level].push_back(root);
     }
+   else if(mymap[level].size() >= 1){
+        int n = mymap[level].size(); 
+        root->next = mymap[level][n - 1];
+        mymap[level].push_back(root);
+    }
+    dfs(root->right , level + 1);
+    dfs(root->left , level + 1);
+}
+
+Node *connect(Node *root)
+{
+    dfs(root , 0);
     return root;
 }
-};
+};  
