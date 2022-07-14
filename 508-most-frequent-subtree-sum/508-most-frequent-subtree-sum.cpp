@@ -11,29 +11,29 @@
  */
 class Solution {
 public:
-    unordered_map<int,int> mymap;
-int maxcount;// take care of that perticular max value
+    unordered_map<int, int> mymap;
+int max_freq = 0;
 
-// return sum of subtrees
+vector<int> res;
+
 int helper(TreeNode *root){
-    if(!root) return 0;
+    if(root == NULL) return 0;
     int sum = root->val + helper(root->left) + helper(root->right);
-    maxcount = max(maxcount , ++mymap[sum]);
+    mymap[sum]++;
+    if(mymap[sum] > max_freq){
+        max_freq = mymap[sum];
+        res.clear();
+        res.push_back(sum);
+    }
+    else if(mymap[sum] == max_freq){
+        res.push_back(sum);
+    }
     return sum;
 }
 
 vector<int> findFrequentTreeSum(TreeNode *root)
 {
-    vector<int> res;
     helper(root);
-    auto it = mymap.begin();
-    for (; it != mymap.end(); it++)
-    {   
-       if(it->second == maxcount){
-        res.push_back(it->first);
-       }
-    }
-    return res; 
+    return res;
 }
-
 };
