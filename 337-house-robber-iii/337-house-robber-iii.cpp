@@ -11,30 +11,38 @@
  */
 class Solution {
 public:
-    
-int rob(TreeNode *root, map<pair<TreeNode *, bool>, int> &mymap, bool isParentLooted = false)
+    int rob(TreeNode *root, bool isparent_looted, map<pair<TreeNode *, bool>, int> &mymap)
 {
     if (root == NULL)
     {
         return 0;
     }
-    if (mymap.count({root, isParentLooted}) > 0)
+
+    if (mymap.count({root, isparent_looted}) == 1)
     {
-        return mymap[{root, isParentLooted}];
+        return mymap[{root, isparent_looted}];
     }
-    int ans1 = 0;
-    if (isParentLooted == false)
+
+    int op1 = INT_MIN, op2 = INT_MIN;
+
+    if (isparent_looted == true)
     {
-        ans1 = rob(root->left, mymap, true) + rob(root->right, mymap, true) + root->val;
+        int leftans = rob(root->left, false , mymap);
+        int rightans = rob(root->right, false , mymap);
+        op1 = leftans + rightans;
     }
-    int ans2 = rob(root->left, mymap, false) + rob(root->right, mymap, false);
-    mymap[{root, isParentLooted}] = max(ans1, ans2);
-    return mymap[{root, isParentLooted}];
+    else
+    {
+        op1 = rob(root->left, false , mymap) + rob(root->right, false , mymap);
+        op2 = root->val + rob(root->left, true , mymap) + rob(root->right, true , mymap);
+    }
+    mymap[{root, isparent_looted}] = max(op1, op2);
+    return max(op1, op2);
 }
 
 int rob(TreeNode *root)
 {
-    map<pair<TreeNode *, bool>, int> mymap;
-    return rob(root, mymap);
+    map<pair<TreeNode * , bool> , int> mymap;
+    return rob(root , false , mymap);
 }
 };
