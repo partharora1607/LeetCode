@@ -14,21 +14,17 @@ public:
    TreeNode *deleteNode(TreeNode *root, int key)
 {
     if (root == NULL)
-    {
         return NULL;
-    }
     if (root->val == key)
     {
-        if (root->left == NULL && root->right == NULL)
-        {
+        if(root->left == NULL && root->right == NULL){
             return NULL;
         }
         else if (root->left == NULL)
         {
             return root->right;
         }
-        else if (root->right == NULL)
-        {
+       else if(root->right == NULL){
             return root->left;
         }
         else
@@ -41,9 +37,11 @@ public:
             temp->left = root->left;
             return root->right;
         }
+        
+        return root->right;
     }
     root->left = deleteNode(root->left, key);
-    root->right = deleteNode(root->right , key);
+    root->right = deleteNode(root->right, key);
     return root;
 }
 };
