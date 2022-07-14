@@ -11,21 +11,18 @@
  */
 class Solution {
 public:
-    int sum = 0;
+int sum = 0;
 
-bool helper(TreeNode *root){
+void helper(TreeNode *root){
     if(root == NULL){
-        return false;
+        return;
     }
-    if(root->left == NULL && root->right == NULL){
-        return true;
-    }
-    bool leftans = helper(root->left);
-    if(leftans){
-        sum += root->left->val;
-    }
+    helper(root->left);
     helper(root->right);
-    return root->left == NULL && root->right == NULL;
+    if(root->left != NULL && (root->left->left == NULL && root->left->right == NULL)){
+        sum += root->left->val;
+        return;
+    }
 }
 
 int sumOfLeftLeaves(TreeNode *root)
