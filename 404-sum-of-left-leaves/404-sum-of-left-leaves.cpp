@@ -11,48 +11,26 @@
  */
 class Solution {
 public:
+    int sum = 0;
 
-// Method - 1
-int sumOfLeftLeaves(TreeNode *root, bool isleft = false)
-{
-    if (root == NULL)
-    {
-        return 0;
+bool helper(TreeNode *root){
+    if(root == NULL){
+        return false;
     }
-
-    if (root->left == NULL && root->right == NULL)
-    {
-        return isleft ? root->val : 0;
+    if(root->left == NULL && root->right == NULL){
+        return true;
     }
-    return sumOfLeftLeaves(root->left, true) + sumOfLeftLeaves(root->right, false);
+    bool leftans = helper(root->left);
+    if(leftans){
+        sum += root->left->val;
+    }
+    helper(root->right);
+    return root->left == NULL && root->right == NULL;
 }
-    
-//     Method - 2
-    
-    
-// int sum = 0;
 
-// void helper(TreeNode *root)
-// {
-//     if (root == NULL)
-//     {
-//         return;
-//     }
-
-//     if (root->left != NULL && root->left->left == NULL && root->left->right == NULL)
-//     {
-//         sum += root->left->val;
-//     }
-
-//     helper(root->left);
-//     helper(root->right);
-// }
-
-// int sumOfLeftLeaves(TreeNode *root)
-// {
-//     helper(root);
-//     return sum;
-// }
-    
-
+int sumOfLeftLeaves(TreeNode *root)
+{
+    helper(root);
+    return sum;
+}
 };
