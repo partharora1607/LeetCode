@@ -11,18 +11,23 @@
  */
 class Solution {
 public:
+// is it a eaf node
+
 int sum = 0;
 
-void helper(TreeNode *root){
+bool helper(TreeNode *root){
     if(root == NULL){
-        return;
+        return false;
     }
-    helper(root->left);
-    helper(root->right);
-    if(root->left != NULL && (root->left->left == NULL && root->left->right == NULL)){
+    if(root->left == NULL && root->right == NULL){
+        return true;
+    }
+    bool leftans = helper(root->left);
+    if(leftans){
         sum += root->left->val;
-        return;
     }
+    helper(root->right);
+    return root->left == NULL && root->right == NULL;
 }
 
 int sumOfLeftLeaves(TreeNode *root)
