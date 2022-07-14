@@ -11,35 +11,32 @@
  */
 class Solution {
 public:
-vector<string> res;
 
-string convert(int a)
-{
-    string s;
-    for (int i = a; i != 0; i /= 10)
-    {
-        char c = (i % 10) + '0';
-        s += c;
-    }
-    reverse(s.begin(), s.end());
-    return s;
-}
+
+vector<string> res;
 
 void helper(TreeNode *root, string s)
 {
-    if (root == NULL) return;
-    if (root->val < 0) s += "-";
-    s += convert(abs(root->val));
-    if (root->left == NULL && root->right == NULL) res.push_back(s);
-    s += "->";
-    helper(root->left, s);
-    helper(root->right, s);
+    if (root == NULL)
+        return;
+    s += to_string(root->val);
+    if (root->left == NULL && root->right == NULL)
+    {
+        res.push_back(s);
+        return;
+    }
+    else
+    {
+        s += "->";
+    }
+    helper(root->left , s);
+    helper(root->right , s);
 }
 
 vector<string> binaryTreePaths(TreeNode *root)
 {
-    string s = "";
-    helper(root, s);
+    string s;
+    helper(root , s);
     return res;
 }
 };
