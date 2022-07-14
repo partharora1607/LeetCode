@@ -11,45 +11,42 @@
  */
 class Solution {
 public:
-vector<int> res;
-int max_freq = 0, currfreq = 0, precursor = INT_MIN;
+    vector<int> res;
 
-void inorder(TreeNode *root)
+int precurssor = INT_MIN;
+int currfreq = 0;
+int max_freq = 0;
+
+void helper(TreeNode *root)
 {
     if (root == NULL)
-    {   
         return;
-    }
-
-    inorder(root->left);
-
-    if (precursor == root->val)
+    helper(root->left);
+    if (precurssor == root->val)
     {
-        currfreq++;
+        currfreq += 1;
     }
     else
     {
         currfreq = 1;
     }
-
     if (currfreq > max_freq)
     {
         res.clear();
         max_freq = currfreq;
         res.push_back(root->val);
     }
-    else if (currfreq == max_freq)
+    else if(currfreq == max_freq)
     {
         res.push_back(root->val);
     }
-    precursor = root->val;
-    inorder(root->right);
+    precurssor = root->val;
+    helper(root->right);
 }
 
 vector<int> findMode(TreeNode *root)
 {
-    inorder(root);
+    helper(root);
     return res;
 }
-
 };
