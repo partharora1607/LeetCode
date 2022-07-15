@@ -40,12 +40,12 @@ int helper(TreeNode *root)
     }
     
     
-    if (leftans == 1 && rightans == 1)
+   else  if (leftans == 1 && rightans == 1)
     {
         return -1;
     }
 
-    if (leftans == 0 || rightans == 0)
+    else if (leftans == 0 || rightans == 0)
     {
         return 1;
     }
