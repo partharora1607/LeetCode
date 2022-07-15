@@ -18,7 +18,7 @@ public:
 // 1-> vistited / covered
 // -1 -> need camera
 
-int ans = 0;
+int count = 0;
 
 int helper(TreeNode *root )
 {
@@ -30,7 +30,7 @@ int helper(TreeNode *root )
     int rightans = helper(root->right);
 
     if(leftans == -1 || rightans == -1){
-        ans++;
+        count++;
         return 0;
     }
 
@@ -46,10 +46,10 @@ int helper(TreeNode *root )
 
 int minCameraCover(TreeNode *root)
 {
- int a = helper(root);
-    if(a < 0){
-        ans++;
+ int ans = helper(root);
+    if(ans < 0){
+        count++;
     }
-    return ans;
+    return count;
 }
 };
