@@ -38,16 +38,18 @@ int helper(TreeNode *root)
         count++;
         return 0;
     }
+    
+    
+    if (leftans == 1 && rightans == 1)
+    {
+        return -1;
+    }
 
     if (leftans == 0 || rightans == 0)
     {
         return 1;
     }
 
-    if (leftans == 1 && rightans == 1)
-    {
-        return -1;
-    }
 
     return 0;
 }
