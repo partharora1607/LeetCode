@@ -20,34 +20,43 @@ public:
 
 int count = 0;
 
-int helper(TreeNode *root )
+int helper(TreeNode *root)
 {
-    if(!root) return 1;
-    if(!root->left && !root->right){
-        return -1;// need camera
+    if (root == NULL)
+    {
+        return 1;
+    }
+    if (root->left == NULL && root->right == NULL)
+    {
+        return -1;
     }
     int leftans = helper(root->left);
     int rightans = helper(root->right);
 
-    if(leftans == -1 || rightans == -1){
+    if (leftans == -1 || rightans == -1)
+    {
         count++;
         return 0;
     }
 
-    if(leftans == 0 || rightans == 0){
+    if (leftans == 0 || rightans == 0)
+    {
         return 1;
     }
 
-    if(leftans == 1 && rightans == 1){
+    if (leftans == 1 && rightans == 1)
+    {
         return -1;
     }
+
     return 0;
 }
 
 int minCameraCover(TreeNode *root)
 {
- int ans = helper(root);
-    if(ans < 0){
+    int ans = helper(root);
+    if (ans < 0)
+    {
         count++;
     }
     return count;
