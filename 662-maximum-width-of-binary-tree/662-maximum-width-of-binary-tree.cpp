@@ -59,4 +59,5 @@ public:
     }
     return max_width;
 }
+
 };
