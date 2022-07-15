@@ -12,6 +12,8 @@
 class Solution {
 public:
     
+
+    
 // 0 -> have camera
 // 1-> vistited / covered
 // -1 -> need camera
