@@ -11,30 +11,37 @@
  */
 class Solution {
 public:
-int ans = 0;
-int maxdepth = 0;
+    int max_depth = 0;
+int res = 0;
 
-void helper(TreeNode *root, int depth = 0)
+// preorder Traversal
+void helper(TreeNode *root, int level)
 {
-    if(root == NULL)
+    if (root == NULL)
     {
         return;
     }
-    if(root->left == NULL && root->right == NULL && depth > maxdepth){
-        maxdepth = depth;
-        ans = root->val;
+
+    if(root->left == NULL && root->right == NULL){
+        if(level > max_depth){
+            max_depth = level;
+            res = root->val;
+        }
+        return;
     }
-    helper(root->left, depth + 1); 
-    helper(root->right, depth + 1);
+
+    helper(root->left , level + 1);
+    helper(root->right , level + 1);
+
+
 }
 
 int findBottomLeftValue(TreeNode *root)
 {
-    if (root->left == NULL && root->right == NULL)
-    {
+    if(root->left == NULL && root->right == NULL){
         return root->val;
     }
-    helper(root);
-    return ans;
+    helper(root , 0);
+    return res;
 }
 };
