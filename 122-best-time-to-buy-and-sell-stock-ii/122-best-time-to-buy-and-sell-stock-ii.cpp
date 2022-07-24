@@ -1,33 +1,20 @@
 class Solution {
 public:
-    int maxProfit(vector<int> &ar)
-{
-    if (ar.size() == 1)
-    {
-        return 0;
+    int maxProfit(vector<int>& ar) {
+        int n = ar.size();
+        if(n <= 1){
+            return 0;
+        }
+        
+        int ans = 0;
+        
+        for(int i = 1 ; i < n ; i++){
+            if(ar[i] > ar[i - 1]){
+                ans += ar[i] - ar[i - 1];
+            }
+        }
+        
+        return ans;
+        
     }
-
-    int buy = 0, sell = 1;
-    int profit = 0;
-    while (sell < ar.size())
-    {
-        if (ar[buy] > ar[sell])
-        {
-            buy = sell;
-        }
-        else if (sell + 1 < ar.size() && ar[sell + 1] > ar[sell])
-        {
-            sell++;
-            continue;
-        }
-        else
-        {
-            profit += ar[sell] - ar[buy];
-            sell++;
-            buy = sell;
-        }
-        sell++;
-    }
-    return profit;
-}
 };
