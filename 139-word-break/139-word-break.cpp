@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool wordBreak(string s, vector<string> &v)
+bool wordBreak(string s, vector<string> &v)
 {
     unordered_map<string, int> mymap;
 
@@ -11,17 +11,17 @@ public:
 
     int n = s.length();
 
-    vector<int> dp(n + 1, -1); // output->[i] -> n size ke liye ans;
+    vector<int> dp(n + 1, -1);
 
-    dp[n] = 1;
+    dp[0] = 1;
 
-    for (int i = n - 1; i >= 0; i--)
+    for (int i = 1; i <= n; i++)
     {
-        string s1;
-        for (int j = i; j < n; j++)
+        string s1 = "";
+        for (int j = n - i; j < n; j++)
         {
             s1 += s[j];
-            if (mymap.count(s1) == 1 && dp[j + 1] == 1)
+            if (mymap.count(s1) == 1 && dp[n - j - 1] == 1)
             {
                 dp[i] = 1;
             }
@@ -31,6 +31,7 @@ public:
             dp[i] = 0;
         }
     }
-    return dp[0];
+
+    return dp[n];
 }
 };
