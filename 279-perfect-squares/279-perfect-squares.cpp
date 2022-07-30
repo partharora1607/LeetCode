@@ -24,7 +24,6 @@ int helper(int n, vector<int> &output)
     output[n] = ans;
     return ans;
 }
-
 int numSquares(int n)
 {
     vector<int> output(n + 1, -1);
