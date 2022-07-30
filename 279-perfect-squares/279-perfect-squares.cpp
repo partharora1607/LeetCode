@@ -11,8 +11,9 @@ public:
     output[1] = 1;
     output[2] = 2;
     output[3] = 3;
+    output[4] = 1;
 
-    for (int i = 4; i <= n; i++)
+    for (int i = 5; i <= n; i++)
     {   
         int j = 1;
         int ans = pow(10,7);
