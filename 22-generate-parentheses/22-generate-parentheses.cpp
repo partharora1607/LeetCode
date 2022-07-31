@@ -1,33 +1,25 @@
 class Solution {
 public:
-   void helper(int n, vector<string> &v, string s, int openN, int closedN)
-{
-    if (closedN == n && openN == n)
-    {
-        v.push_back(s);
+    vector<string> res;
+
+void helper(int n , int openN , int closedN , string s){
+    if(closedN == n && openN == n){
+        res.push_back(s);
         return;
     }
-
-    if (openN < n)
-    {
-        s.push_back('(');
-        helper(n, v, s, openN + 1, closedN);
-        s.pop_back();
+    if(openN < n){
+        helper(n , openN + 1 , closedN , s + '(');
+    }
+    if(openN> closedN){
+        helper(n , openN , closedN + 1 , s + ')');      
     }
 
-    if (closedN < openN)
-    {
-        s.push_back(')');
-        helper(n, v, s, openN, closedN + 1);
-        s.pop_back();
-    }
 }
 
 vector<string> generateParenthesis(int n)
 {
-    vector<string> v;
     string s = "";
-    helper(n, v, s, 0, 0);
-    return v;
+    helper(n ,  0 , 0 , s);
+    return res;
 }
 };
