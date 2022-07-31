@@ -3,7 +3,7 @@ public:
     vector<string> res;
 
 void helper(int n , int openN , int closedN , string s){
-    if(closedN == n && openN == n){
+    if(closedN == n){
         res.push_back(s);
         return;
     }
@@ -13,7 +13,6 @@ void helper(int n , int openN , int closedN , string s){
     if(openN> closedN){
         helper(n , openN , closedN + 1 , s + ')');      
     }
-
 }
 
 vector<string> generateParenthesis(int n)
