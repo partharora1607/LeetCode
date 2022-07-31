@@ -1,52 +1,63 @@
 class Solution {
 public:
-   string longestPalindrome(string s)
+    string longestPalindrome(string s)
 {
-    int ans = 0;
     int fsi = 0;
     int fei = 0;
-    for (int i = 0; s[i] != '\0'; i++)
-    {
-        // odd
-        int si = i - 1, ei = i + 1;
-        int count = 1;
-        while (si >= 0 && ei <= s.length() && s[si] == s[ei])
+
+    int n = s.length();
+    int ans = 0;
+    int i = 0;
+    while (i < n)
+    { // i++
+        // odd maximum
+        int start, end;
+        start = i - 1;
+        end = i + 1;
+        while (start >= 0 && end < n && s[start] == s[end])
         {
-            count += 2;
-            si--;
-            ei++;
+            start--;
+            end++;
         }
-        if (count > ans)
+        start++;
+        end--;
+        int size = end - start + 1;
+        if (size > ans)
         {
-            ++si;
-            --ei;
-            ans = count;
-            fsi = si;
-            fei = ei;
+            ans = size;
+            fsi = start;
+            fei = end;
         }
-        // even        
-        if (i + 1 < s.length() && s[i] == s[i + 1])
-        {
-            si = i - 1;
-            ei = i + 1;
-            ei++;
-            count = 2;
-            while (si >= 0 && ei <= s.length() && s[si] == s[ei])
-            {
-                count += 2;
-                si--;
-                ei++;
-            }
-            if (count > ans)
-            {
-                ++si;
-                --ei;
-                ans = count;
-                fsi = si;
-                fei = ei;
-            }
-        }
+        i++;
     }
-    return s.substr(fsi , fei - fsi + 1);
+
+    int val1 = 0, var2 = 1;
+    while (val1 >= 0 && var2 < n)
+    {
+        // even length
+        if(s[val1] == s[var2])
+        {
+            int start = val1 - 1;
+            int end = var2 + 1;
+            while (start >= 0 && end < n && s[start] == s[end])
+            {
+                start--;
+                end++;
+            }
+            start++;
+            end--;
+            int size = end - start + 1;
+            if (size > ans)
+            {
+                ans = size;
+                fsi = start;
+                fei = end;
+            }
+        }
+        val1++;
+        var2++;
+    }
+
+    return s.substr(fsi, fei - fsi + 1);
 }
 };
