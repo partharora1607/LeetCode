@@ -30,7 +30,6 @@ public:
         }
         i++;
     }
-
     int val1 = 0, var2 = 1;
     while (val1 >= 0 && var2 < n)
     {
@@ -57,7 +56,6 @@ public:
         val1++;
         var2++;
     }
-
     return s.substr(fsi, fei - fsi + 1);
 }
 };
