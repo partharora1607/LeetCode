@@ -37,5 +37,7 @@ int longestIncreasingPath(vector<vector<int>> &ar)
     }
     return res;
 }
+// TC - > 0(m . n);
+// SC -> 0(m . n);
 
 };
