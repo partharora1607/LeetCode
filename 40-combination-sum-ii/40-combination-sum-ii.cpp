@@ -1,14 +1,17 @@
 class Solution {
 public:
-void helper(vector<int> &ar, int si, int ei, int target, int sum, vector<int> &ans, vector<vector<int>> &v)
+vector<vector<int>> res;
+
+void helper(vector<int> &ar, int si, int ei, int target, int sum, vector<int> &output)
 {
+    if (target == sum)
+    {
+        res.push_back(output);
+        return;
+    }
+
     if (si > ei)
     {
-        if (sum == target)
-        {
-            v.push_back(ans);
-            return;
-        }
         return;
     }
 
@@ -17,34 +20,26 @@ void helper(vector<int> &ar, int si, int ei, int target, int sum, vector<int> &a
         return;
     }
 
-    if (sum == target)
+    for (int i = si + 1; i <= ei; i++)
     {
-        v.push_back(ans);
-        return;
-    }
-
-    for (int i = si; i <= ei; i++)
-    {
-        if (i == si)
+        if (ar[i] != ar[i - 1])
         {
-            ans.push_back(ar[si]);
-            helper(ar, si + 1, ei, target, sum + ar[si], ans, v);
-            ans.pop_back();
-        }
-        else if (ar[i] != ar[i - 1])
-        {
-            helper(ar, i, ei, target, sum, ans, v);
+            helper(ar, i, ei, target, sum, output);
             break;
         }
     }
+
+    output.push_back(ar[si]);
+    helper(ar, si + 1, ei, target, sum + ar[si], output);
+    output.pop_back();
 }
 
 vector<vector<int>> combinationSum2(vector<int> &ar, int target)
 {
-    vector<int> ans;
-    vector<vector<int>> v;
+    int n = ar.size();
     sort(ar.begin(), ar.end());
-    helper(ar, 0, ar.size() - 1, target, 0, ans, v);
-    return v;
+    vector<int> output;
+    helper(ar, 0, n - 1, target, 0, output);
+    return res;
 }
 };
