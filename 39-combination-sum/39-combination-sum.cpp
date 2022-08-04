@@ -1,38 +1,37 @@
 class Solution {
 public:
-    void helper(vector<int> &ar, int si, int ei, vector<int> &ans, int target, int sum, vector<vector<int>> &v)
+vector<vector<int>> res;
+
+void helper(vector<int> &ar, int si, int ei, int target, int sum, vector<int> &output)
 {
     if (si > ei)
     {
-        if (sum == target)
-        {
-            v.push_back(ans);
-            return;
-        }
         return;
     }
+
     if (sum == target)
     {
-        v.push_back(ans);
+        res.push_back(output);
         return;
     }
+
     if (sum > target)
     {
         return;
     }
-    // not include the element
-    helper(ar, si + 1, ei, ans, target, sum, v);
-    // include
-    ans.push_back(ar[si]);
-    helper(ar, si, ei, ans, target, sum + ar[si], v);
-    ans.pop_back(); // as ans is a global variable
+
+    helper(ar, si + 1, ei, target, sum, output);
+    sum += ar[si];
+    output.push_back(ar[si]);
+    helper(ar, si, ei, target, sum, output);
+    output.pop_back();
 }
 
-vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+vector<vector<int>> combinationSum(vector<int> &ar, int target)
 {
-    vector<int> ans;
-    vector<vector<int>> v;
-    helper(candidates, 0, candidates.size() - 1, ans, target, 0, v);
-    return v;
+    int n = ar.size();
+    vector<int> output;
+    helper(ar , 0, n - 1 , target ,0 ,output);
+    return res;
 }
 };
