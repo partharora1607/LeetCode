@@ -2,12 +2,13 @@ class Solution {
 public:
 bool helper(vector<int> &ar, int si, int ei, int target, int sum, vector<vector<int>> &output)
 {
+    if (sum == target)
+    {
+         return true;
+    }
+    
     if (si > ei)
     {
-        if (sum == target)
-        {
-            return true;
-        }
         return false;
     }
 
