@@ -41,7 +41,7 @@ bool canPartition(vector<int> &ar)
         return false;
     }
     int target = sum / 2;
-    vector<vector<int>> output(n + 1, vector<int>(target + 1, -1));
+    vector<vector<int>> output(n, vector<int>(target + 1, -1));
     return helper(ar, 0, n - 1, target, 0, output);
 }
 
