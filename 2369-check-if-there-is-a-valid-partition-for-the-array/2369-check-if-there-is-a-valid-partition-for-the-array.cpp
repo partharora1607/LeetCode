@@ -26,9 +26,9 @@ bool helper(vector<int> &ar, int i, vector<int> &output)
             }
         }
     }
-    if (i + 2 < ar.size() && ar[i] == ar[i + 1] - 1 && ar[i] == ar[i + 2] - 2)
+    if (i + 2 < ar.size())
     {
-        if (helper(ar, i + 3, output))
+        if (ar[i] == ar[i + 1] - 1 && ar[i] == ar[i + 2] - 2 && helper(ar, i + 3, output))
         {
             return true;
         }
