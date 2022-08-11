@@ -1,22 +1,49 @@
 class Solution {
 public:
-   bool solve(vector<int>& nums, int i, vector<int>& dp){
-        if(i == nums.size()) return true;
-        if(dp[i] != -1) return dp[i];
-        
-        if(i + 1 < nums.size() && nums[i] == nums[i+1] ) {
-            if(solve(nums, i + 2, dp)) return true;
-            if(i + 2 < nums.size() && nums[i] == nums[i+2]){
-                if(solve(nums, i + 3, dp)) return true;
+  
+bool helper(vector<int> &ar, int i, vector<int> &output)
+{
+    if (i == ar.size())
+    {
+        return true;
+    }
+    if (output[i] != -1)
+    {
+        return output[i];
+    }
+
+    if (i + 1 < ar.size() && ar[i] == ar[i + 1])
+    {
+        if (helper(ar, i + 2, output))
+        {
+            return true;
+        }
+        if (i + 2 < ar.size() && ar[i] == ar[i + 2])
+        {
+            if (helper(ar, i + 3, output))
+            {
+                return true;
             }
+            if (ar[i] == ar[i + 1] - 1 && ar[i] == ar[i + 2] - 2)
+            {
+                return true;
+            }
+            return false;
         }
-        if(i + 2 < nums.size() && nums[i] == nums[i+1]-1 && nums[i] == nums[i+2] - 2 ){
-            if(solve(nums, i + 3, dp)) return true;
+    }
+    if (i + 2 < ar.size() && ar[i] == ar[i + 1] - 1 && ar[i] == ar[i + 2] - 2)
+    {
+        if (helper(ar, i + 3, output))
+        {
+            return true;
         }
-        return dp[i] = false;
     }
-    bool validPartition(vector<int>& nums) {
-         vector<int> dp(nums.size(), -1);
-        return solve(nums, 0, dp);
-    }
+    return output[i] = false;
+}
+bool validPartition(vector<int> &ar)
+{
+    int n = ar.size();
+    vector<int> output(n, -1);
+    return helper(ar, 0, output);
+}
 };
