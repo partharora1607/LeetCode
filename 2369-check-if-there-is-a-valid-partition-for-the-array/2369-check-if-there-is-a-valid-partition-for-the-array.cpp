@@ -1,43 +1,43 @@
 class Solution {
 public:
   
-bool helper(vector<int> &ar, int i, vector<int> &output)
+bool helper(vector<int> &ar, int si, int ei, vector<int> &output)
 {
-    if (i == ar.size())
+    if (si > ei)
     {
         return true;
     }
-    if (output[i] != -1)
+    if (output[si] != -1)
     {
-        return output[i];
+        return output[si];
     }
-
-    if (i + 1 < ar.size() && ar[i] == ar[i + 1])
+    if (si + 1 < ar.size() && ar[si] == ar[si + 1])
     {
-        if (helper(ar, i + 2, output))
+        if (helper(ar, si + 2, ei, output))
         {
-            output[i] =  true;
+            output[si] = true;
             return true;
         }
     }
-    if (i + 2 < ar.size())
+    if (si + 2 < ar.size())
     {
-        if (ar[i] == ar[i + 1] - 1 && ar[i] == ar[i + 2] - 2 && helper(ar, i + 3, output))
+        if (ar[si] == ar[si + 1] - 1 && ar[si] == ar[si + 2] - 2 && helper(ar, si + 3, ei, output))
         {
-            output[i] =  true;
+            output[si] = true;
             return true;
         }
-        if((ar[i] == ar[i + 2] && ar[i] == ar[i + 1]) && helper(ar, i + 3, output)){
-            output[i] = true;
+        if ((ar[si] == ar[si + 2] && ar[si] == ar[si + 1]) && helper(ar, si + 3, ei, output))
+        {
+            output[si] = true;
             return true;
         }
     }
-    return output[i] = false;
+    return output[si] = false;
 }
 bool validPartition(vector<int> &ar)
 {
     int n = ar.size();
-    vector<int> output(n, -1);
-    return helper(ar, 0, output);
+    vector<int> output(n + 1, -1);
+    return helper(ar, 0, n - 1, output);
 }
 };
