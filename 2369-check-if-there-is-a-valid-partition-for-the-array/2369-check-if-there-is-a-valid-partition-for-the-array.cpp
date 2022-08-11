@@ -24,11 +24,6 @@ bool helper(vector<int> &ar, int i, vector<int> &output)
             {
                 return true;
             }
-            if (ar[i] == ar[i + 1] - 1 && ar[i] == ar[i + 2] - 2)
-            {
-                return true;
-            }
-            return false;
         }
     }
     if (i + 2 < ar.size() && ar[i] == ar[i + 1] - 1 && ar[i] == ar[i + 2] - 2)
