@@ -16,6 +16,7 @@ bool helper(vector<int> &ar, int i, vector<int> &output)
     {
         if (helper(ar, i + 2, output))
         {
+            output[i] =  true;
             return true;
         }
     }
@@ -23,9 +24,11 @@ bool helper(vector<int> &ar, int i, vector<int> &output)
     {
         if (ar[i] == ar[i + 1] - 1 && ar[i] == ar[i + 2] - 2 && helper(ar, i + 3, output))
         {
+            output[i] =  true;
             return true;
         }
         if((ar[i] == ar[i + 2] && ar[i] == ar[i + 1]) && helper(ar, i + 3, output)){
+            output[i] = true;
             return true;
         }
     }
