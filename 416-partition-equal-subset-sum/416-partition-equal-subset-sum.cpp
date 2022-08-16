@@ -6,13 +6,9 @@ public:
             if(sum == target) return true;
             return false;
         }
-        
         if(sum > target) return false;
-        
         if(output[si][sum] != -1) return output[si][sum];
-        
-        return output[si][sum] = helper(nums , si + 1 , ei , sum , target , output) || helper(nums , si + 1 , ei , sum + nums[si] , target , output);
-        
+        return output[si][sum] = helper(nums , si + 1 , ei , sum , target , output) || helper(nums , si + 1 , ei , sum + nums[si] , target , output);  
     }
     
     bool canPartition(vector<int>& nums) {
