@@ -21,7 +21,9 @@ public:
                 else{
                     dp[i][j]  = 1 + dp[i-1][j-1];
                 }
-                ans = max(ans , dp[i][j]);
+                if(dp[i][j] > ans){
+                    ans = dp[i][j];
+                }
             }
         }
         
