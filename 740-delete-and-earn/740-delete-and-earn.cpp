@@ -1,13 +1,9 @@
 class Solution {
 public:
-    const int maxn=1e4+3;
+       const int maxn=1e4+3;
     int deleteAndEarn(vector<int>& v) 
     {
         int n=v.size();
-     map<int,int> mp;
-    for(int i=0;i<n;i++){
-        mp[v[i]]++;
-    }
     vector<int> freq(maxn,0);
     
     for(int i=0;i<n;i++){
