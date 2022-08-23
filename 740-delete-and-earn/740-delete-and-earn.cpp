@@ -1,8 +1,8 @@
 class Solution {
 public:
-       const int maxn=1e4+3;
     int deleteAndEarn(vector<int>& v) 
     {
+        int maxn = pow(10,4) + 1;
         int n=v.size();
     vector<int> freq(maxn,0);
     
