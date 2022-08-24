@@ -5,7 +5,9 @@ public:
         int n = nums.size();
         int maxi = INT_MIN;
         for(int i = 0 ; i < n ; i++){
-            maxi = max(maxi , nums[i]);
+            if(nums[i] > maxi){
+                maxi  = nums[i];
+            }
             mymap[nums[i]]++;
         }
         
