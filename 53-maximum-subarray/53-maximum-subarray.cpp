@@ -1,6 +1,6 @@
 class Solution {
 public:
-int maxSubArray(vector<int> &ar)
+   int maxSubArray(vector<int> &ar)
 {
     int ans = INT_MIN;
     int sum = 0;
@@ -19,5 +19,4 @@ int maxSubArray(vector<int> &ar)
     }
     return ans;
 }
-
 };
