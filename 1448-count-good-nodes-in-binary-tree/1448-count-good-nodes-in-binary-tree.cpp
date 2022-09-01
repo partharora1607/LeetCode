@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int count = 0;
+int count = 0;
 
 void helper(TreeNode *root , int max_so_far){
     if(!root) return;
