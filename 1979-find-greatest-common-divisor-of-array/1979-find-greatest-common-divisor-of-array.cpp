@@ -3,7 +3,7 @@ public:
     int findGCD(vector<int>& ar) {
         int mini = INT_MAX , maxi = INT_MIN;
         int n = ar.size();
-        for(int i = 0 ;  i < n ; i ++){
+        for(int i = 0 ;i < n;i ++){
             if(ar[i] < mini){
                 mini = ar[i];
             }
