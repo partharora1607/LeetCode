@@ -3,6 +3,11 @@ public:
     int countElements(vector<int>& ar) {
         unordered_map<int,int> mymap;
         int n = ar.size();
+        
+        if(n <= 2){
+            return 0;
+        }
+        
         int mini = INT_MAX  , maxi = INT_MIN;
         for(int i = 0 ; i < n ; i ++){
             mymap[ar[i]]++;
@@ -18,16 +23,9 @@ public:
         // cout << maxi << "  " << mini << endl;
         int ans = 0;
         
-        auto it = mymap.begin();
-        while(it != mymap.end()){
-            
-            if(it->first != mini && it->first != maxi){
-                ans += it->second;
-            }
-            it++;
-        }
+        ans = n - mymap[mini] - mymap[maxi];
         
-        return ans;
+        return ans > 0 ? ans : 0;
         
     }
 };
