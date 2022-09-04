@@ -14,9 +14,6 @@ public:
             }
         }
         ar.push_back(count);
-        for(int i = 0; i < ar.size() ;i++){
-            cout << ar[i ] << " " << endl;
-        }
         int ans = 0;
         for(int i = 1 ; i < ar.size() ;i++){
             ans += min(ar[i] , ar[i - 1]);
