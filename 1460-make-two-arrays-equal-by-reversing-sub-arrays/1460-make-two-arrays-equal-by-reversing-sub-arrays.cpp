@@ -1,20 +1,17 @@
 class Solution {
 public:
     bool canBeEqual(vector<int>& target, vector<int>& ar) {
-        int n = ar.size();
-        unordered_map<int,int> mymap;
-        for(int i = 0 ; i <  n ; i ++){
-            mymap[ar[i]]++;
+       vector<int> freq(10001, 0);
+        for(int i = 0 ; i < target.size() ; i ++){
+            freq[target[i]]++;
         }
-        for(int i = 0 ; i  < target.size(); i++){
-            mymap[target[i]]--;
+        for(int i = 0 ; i  < ar.size() ; i++){
+            freq[ar[i]]--;
         }
-        auto it = mymap.begin();
-        while(it != mymap.end()){
-            if(it->second != 0){
+        for(int i = 0 ; i < 1001; i++){
+            if(freq[i] != 0){
                 return false;
             }
-            it++;
         }
         return true;
     }
