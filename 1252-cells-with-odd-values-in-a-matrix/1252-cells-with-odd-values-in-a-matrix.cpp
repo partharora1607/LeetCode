@@ -11,49 +11,49 @@ public:
             mymap_row[row]++;
             mymap_col[col]++;
         }
-        // for(int i = 0 ; i < m ; i++){
-        //     int val = mymap_row[i];
-        //     for(int j = 0 ; j < n;j++){
-        //         dp[i][j] += val;
-        //     }
-        // }
+        for(int i = 0 ; i < m ; i++){
+            int val = mymap_row[i];
+            for(int j = 0 ; j < n;j++){
+                dp[i][j] += val;
+            }
+        }
         
         
         
-//         for(int j = 0 ; j < n ;j++){
-//             int val = mymap_col[j];
-//             cout << "val" << " " << val << endl;
-//             for(int i = 0 ; i < m ; i++){
-//                 dp[i][j] += val;
-//             }
-//         }
-        
-//         int count = 0;
-        
-//         for(int i = 0 ; i < m ;i++){
-//             for(int j =0; j < n ;j++){
-//                 if(dp[i][j] % 2 != 0){
-//                     count++;
-//                 }
-//             }
-//         }
-//         return count;
+        for(int j = 0 ; j < n ;j++){
+            int val = mymap_col[j];
+            cout << "val" << " " << val << endl;
+            for(int i = 0 ; i < m ; i++){
+                dp[i][j] += val;
+            }
+        }
         
         int count = 0;
-        int val1 , val2;
+        
         for(int i = 0 ; i < m ;i++){
-            val1 = mymap_row[i];
-            int j;
-            for(j =0 ; j < n; j++){
-                val2 = mymap_col[j];
-            dp[i][j] = val1 + val2;
-             if(dp[i][j] % 2 != 0)  
-                {
+            for(int j =0; j < n ;j++){
+                if(dp[i][j] % 2 != 0){
                     count++;
-              }
+                }
             }
         }
         return count;
+        
+//         int count = 0;
+//         int val1 , val2;
+//         for(int i = 0 ; i < m ;i++){
+//             val1 = mymap_row[i];
+//             int j;
+//             for(j =0 ; j < n; j++){
+//                 val2 = mymap_col[j];
+//             dp[i][j] = val1 + val2;
+//              if(dp[i][j] % 2 != 0)  
+//                 {
+//                     count++;
+//               }
+//             }
+//         }
+//         return count;
                 
     }
 };
