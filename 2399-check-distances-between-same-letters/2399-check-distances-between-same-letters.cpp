@@ -11,7 +11,6 @@ public:
                 int dis = abs(mymap[s[i]] - i) - 1;
                 if(dis != distance[val])
                 {
-                    cout << dis << " " << distance[val] << endl;
                     return false;
                 }
             }
