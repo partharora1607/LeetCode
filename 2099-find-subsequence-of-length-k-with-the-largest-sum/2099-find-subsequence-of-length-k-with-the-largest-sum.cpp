@@ -1,14 +1,12 @@
 class Solution {
 public:
     
-    typedef pair<int, int> pi;
-    
     vector<int> maxSubsequence(vector<int>& ar, int k) {
         if(ar.size() < k){
             return ar;
         }
         vector<int> res;
-        priority_queue<pi, vector<pi>, greater<pi> > pq;
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
         for(int i = 0 ; i < k ;i++){
             pq.push({ar[i] , i});
         }
