@@ -1,20 +1,27 @@
 class Solution {
 public:
-    int search(vector<int>& ar, int target) {
-        int si = 0 , ei =  ar.size() - 1;
-        int mid;
-        while(si <= ei){
-            mid = (si + ei) / 2;
-            if(ar[mid] == target){
-                return mid;
-            }
-            else if(ar[mid] < target){
-                si = mid + 1;
-            }
-            else{
-                ei = mid - 1; 
-            }
-        }
-        return -1;
-    }
+    int binary(vector<int>&nums, int low, int high ,int target){
+    
+    if(low>high) return -1;
+  
+    int mid=low+(high-low)/2;
+    
+    if(nums[mid]==target) return mid;
+    
+    if(nums[mid]<target)
+        return binary(nums,mid+1,high,target);   
+    
+    
+    else
+        return binary(nums,low,mid-1,target);
+    
+} 
+
+int search(vector<int>& nums, int target) {
+    
+    int start = 0;
+    int end = nums.size()-1;
+    return binary(nums,start,end,target);
+	}
+
 };
