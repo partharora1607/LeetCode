@@ -10,7 +10,7 @@ public:
         vector<int> ans;
         
         for(int i = 0; i < ar2.size() ; i++){
-            if(mymap.count(ar2[i]) && mymap[ar2[i]] > 0){
+            if(mymap[ar2[i]] > 0){
                 ans.push_back(ar2[i]);
                 mymap[ar2[i]]--;
             }
