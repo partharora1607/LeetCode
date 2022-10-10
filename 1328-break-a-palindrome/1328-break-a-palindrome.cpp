@@ -12,10 +12,7 @@ public:
                 return s;
             }
         }
-        if(s[n - 1] == 'a'){
-            s[n - 1] = 'b';
-            return s;
-        }
+        s[n - 1] = 'b';
         return s;
     }
 };
