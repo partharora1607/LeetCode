@@ -1,16 +1,15 @@
 class Solution {
 public:
-    vector<int> createTargetArray(vector<int>& nums, vector<int>& index) {
-        int n = nums.size();
-        vector<int>target(n , -1);   
-        for(int i = 0 ; i < n ; i++){
-            int val = index[i];
-            for(int j = n - 1; j > val; j--){
-                target[j] = target[j - 1];
-            }
-            target[val] = nums[i];
-        }
-        return target;
-    }
-    
+    vector<int> createTargetArray(vector<int> nums, vector<int> index) {
+vector<int> v;
+for(int i=0;i<nums.size();i++){
+if(i>index[i]){
+v.insert(v.begin()+index[i],nums[i]);
+}
+else{
+v.push_back(nums[index[i]]);
+}
+}
+return v;
+}
 };
