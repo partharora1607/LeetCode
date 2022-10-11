@@ -1,21 +1,28 @@
 class Solution {
 public:
     bool halvesAreAlike(string s) {
+        
+        unordered_map<char,int> mymap;
+        mymap['a']++; 
+        mymap['e']++;
+        mymap['i']++;
+        mymap['o']++;
+        mymap['u']++;
+        mymap['A']++;
+        mymap['E']++;
+        mymap['I']++;
+        mymap['O']++;
+        mymap['U']++;
+        
         int half = s.size() / 2;
         int c1 = 0, c2 = 0;
         for(int i = 0 ; i < half ; i++){
-            if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u'){
-                c1++;
-            }
-            else if(s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U'){
+            if(mymap.count(s[i])){
                 c1++;
             }
         }
         for(int i = half ; i < s.size() ; i++){
-            if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u'){
-                c2++;
-            }
-            else if(s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U'){
+            if(mymap.count(s[i])){
                 c2++;
             }
         }
