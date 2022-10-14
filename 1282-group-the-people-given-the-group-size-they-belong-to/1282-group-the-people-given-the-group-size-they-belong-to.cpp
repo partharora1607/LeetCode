@@ -7,7 +7,6 @@ public:
         {
             mpp[groupSizes[i]].push_back(i);
         }
-        sort(groupSizes.begin(),groupSizes.end());
         for(auto it: mpp)
         {
             int check = (it.second.size()/it.first);
