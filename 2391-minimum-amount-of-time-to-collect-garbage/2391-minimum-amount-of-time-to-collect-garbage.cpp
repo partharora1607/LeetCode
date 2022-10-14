@@ -26,9 +26,7 @@ public:
             }
         }
     }
-
     int ans = gc + pc + mc;
-        
     for (int i = 0; i < g; i++)
     {
         ans += travel[i];
