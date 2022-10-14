@@ -3,7 +3,7 @@ public:
     int garbageCollection(vector<string> &garbage, vector<int> &travel)
 {
     int g = 0, p = 0, m = 0;
-    int gc = 0, pc = 0, mc = 0;
+    int ans = 0;
     for (int i = 0; i < garbage.size(); i++)
     {
         string s = garbage[i];
@@ -12,21 +12,18 @@ public:
             if (s[j] == 'G')
             {
                 g = i;
-                gc++;
             }
             else if (s[j] == 'P')
             {
                 p = i;
-                pc++;
             }
             else
             {
                 m = i;
-                mc++;
             }
         }
+        ans += s.size();
     }
-    int ans = gc + pc + mc;
     for (int i = 0; i < g; i++)
     {
         ans += travel[i];
