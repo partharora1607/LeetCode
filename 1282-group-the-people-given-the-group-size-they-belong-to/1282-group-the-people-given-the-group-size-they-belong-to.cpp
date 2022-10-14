@@ -1,14 +1,9 @@
 class Solution {
 public:
     vector<vector<int>> groupThePeople(vector<int>& ar) {
-        
         unordered_map<int , vector<int>> mymap;
-        
         vector<vector<int>> res;
-       
-        int n = ar.size();
-        
-        for(int i =0 ; i < n ; i++){
+        for(int i =0 ; i < ar.size() ; i++){
             int size = ar[i];
             mymap[size].push_back(i);
             if(mymap[size].size() == size)
@@ -17,7 +12,6 @@ public:
                 mymap[size] = {};
             }
         }
-        
         return res;
     }
 };
