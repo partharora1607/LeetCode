@@ -1,15 +1,13 @@
 class Solution {
 public:
     vector<vector<int>> groupThePeople(vector<int>& ar) {
-        unordered_map<int , vector<int>> mymap;
         vector<vector<int>> res;
-        for(int i =0 ; i < ar.size() ; i++){
-            int size = ar[i];
-            mymap[size].push_back(i);
-            if(mymap[size].size() == size)
-            {
-                res.push_back(mymap[size]);
-                mymap[size] = {};
+        unordered_map<int , vector<int>> mymap;
+        for(int i = 0; i < ar.size();i++){
+            mymap[ar[i]].push_back(i);
+            if(mymap[ar[i]].size() == ar[i]){
+                res.push_back(mymap[ar[i]]);
+                mymap[ar[i]]={};
             }
         }
         return res;
